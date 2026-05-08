@@ -87,11 +87,11 @@ export default function WaitlistModal({ isOpen, onClose }) {
               Beta Fechado — Vagas Limitadas
             </div>
 
-            <h2>Seja avisado quando liberarmos as vagas para o Beta de lojistas de suplementos</h2>
+            <h2>Seja avisado quando liberarmos novas vagas para o Beta</h2>
 
             <p className="modal-desc">
-              Tenha acesso antecipado ao MVP do Mascate para testar a integração
-              de agente IA + admin no seu próprio WhatsApp. Sem compromisso, sem cartão.
+              Tenha acesso antecipado à Masca para testar o vendedor IA
+              integrado ao estoque no seu próprio WhatsApp. Sem compromisso, sem cartão.
             </p>
 
             <form onSubmit={handleSubmit} className="modal-form" id="waitlist-form">

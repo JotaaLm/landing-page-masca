@@ -27,7 +27,7 @@ export default function ContactForm() {
     const data = Object.fromEntries(formData.entries());
     data.utm = utmParams;
 
-    trackEvent('lead_formulario_enviado', { revenue: data.revenue });
+    trackEvent('lead_formulario_enviado');
 
     const result = await submitFullLead(data);
 
@@ -44,15 +44,15 @@ export default function ContactForm() {
   return (
     <section className="contact-section" id="contato">
       <div className="container">
-        <p className="section-label reveal">// 04. QUERO PARTICIPAR</p>
+        <p className="section-label reveal">COMECE AGORA</p>
 
         <div className="contact-wrapper">
           <div className="contact-info reveal reveal-delay-1">
-            <h2>Seja um dos primeiros parceiros da Masca.ai.</h2>
+            <h2>Sua loja vendendo 24 horas. Sem contratar ninguém.</h2>
             <p>
-              Estamos selecionando design partners para rodar a Masca.ai
-              em produção com suporte direto do nosso time. Vagas limitadas
-              para garantir a melhor experiência no onboarding.
+              Preencha o formulário e nosso time entra em contato para
+              ativar seu vendedor IA no WhatsApp. Em poucos dias, seus
+              clientes já serão atendidos no automático.
             </p>
 
             <div className="contact-trust">
@@ -60,31 +60,25 @@ export default function ContactForm() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Onboarding ágil e guiado
+                Setup rápido — rodando em até 48h
               </div>
               <div className="trust-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Atendente rodando com o seu número
+                Funciona no seu próprio número de WhatsApp
               </div>
               <div className="trust-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Suporte direto do time técnico
+                Suporte direto com o time técnico
               </div>
               <div className="trust-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Foco total no aumento do seu ticket médio
-              </div>
-              <div className="trust-item">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Parceria técnica validada pelo Macaco Blindado
+                Sem contrato. Cancele quando quiser.
               </div>
             </div>
           </div>
@@ -96,10 +90,10 @@ export default function ContactForm() {
                   <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
                   <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
-                <h3>Cadastro recebido!</h3>
+                <h3>Você está na lista! 🎉</h3>
                 <p>
-                  Nossa equipe vai entrar em contato
-                  em até 24h para iniciar seu onboarding.
+                  Quando o Beta abrir, a equipe Masca vai entrar
+                  em contato para ativar sua conta. Fique de olho no seu WhatsApp ou e-mail cadastrado.
                 </p>
               </div>
             ) : (
@@ -120,23 +114,12 @@ export default function ContactForm() {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="revenue">Volume de Entregas Mensal</label>
-                  <select id="revenue" name="revenue" required defaultValue="">
-                    <option value="" disabled>Selecione</option>
-                    <option>Menos de 100 pedidos</option>
-                    <option>100 a 500 pedidos</option>
-                    <option>500 a 1000 pedidos</option>
-                    <option>Mais de 1000 pedidos</option>
-                  </select>
-                </div>
-
                 {Object.entries(utmParams).map(([key, val]) => (
                   <input key={key} type="hidden" name={key} value={val} />
                 ))}
 
                 <button type="submit" className="form-submit" disabled={loading}>
-                  {loading ? 'Enviando...' : 'Quero ser Design Partner'}
+                  {loading ? 'Enviando...' : 'Quero Entrar no Beta'}
                 </button>
                 {error && (
                   <p className="form-error">{error}</p>

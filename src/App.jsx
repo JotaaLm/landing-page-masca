@@ -5,7 +5,9 @@ import { initPageViewTracking } from './hooks/useAnalytics';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PainPoints from './components/PainPoints';
+import BeforeAfter from './components/BeforeAfter';
 import Anatomy from './components/Anatomy';
+import Differentials from './components/Differentials';
 import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
@@ -25,7 +27,9 @@ export default function App() {
       <main>
         <Hero />
         <PainPoints />
+        <BeforeAfter />
         <Anatomy />
+        <Differentials />
         <SocialProof />
         <Pricing />
         <ContactForm />
