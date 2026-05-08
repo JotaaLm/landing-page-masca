@@ -7,12 +7,12 @@ export default function Pricing() {
       tag: 'MAIS POPULAR',
       price: '497',
       period: '/mês',
-      description: 'A solução completa de inteligência para lojistas que vendem por WhatsApp e fazem delivery.',
+      description: 'Tudo que você precisa para vender pelo WhatsApp com IA e gerenciar sua operação no painel.',
       features: [
         '1 conexão de WhatsApp',
         'Atendente Virtual 24/7 com recomendação',
         'Painel web completo (catálogo, pedidos, logística)',
-        'Human-in-the-loop (aprovação de decisões)',
+        'Aprovação manual quando necessário',
         'Configuração de frete por região',
         'Feed de conversas em tempo real',
         'Integração direta com o seu estoque',
@@ -25,15 +25,15 @@ export default function Pricing() {
       tag: 'PARA CRESCER',
       price: '997',
       period: '/mês',
-      description: 'Para operações maiores com múltiplos canais e um alto volume diário de pedidos.',
+      description: 'Para quem tem múltiplos atendentes e precisa de mais conexões e relatórios avançados.',
       features: [
         'Tudo do plano Agent, mais:',
         'Até 3 conexões de WhatsApp',
         'Multi-atendente no painel',
         'Relatórios avançados de conversão e upsell',
-        'API de integração (quando disponível)',
+        'API para integrações futuras',
         'Onboarding dedicado com o time técnico',
-        'SLA de resposta em 2h',
+        'Suporte responde em até 2h',
         'Prioridade em novas features',
       ],
       highlighted: false,
@@ -49,13 +49,13 @@ export default function Pricing() {
   return (
     <section className="pricing-section" id="precos">
       <div className="container">
-        <p className="section-label reveal">// 03. PLANOS</p>
+        <p className="section-label reveal">PLANOS</p>
         <h2 className="section-title reveal reveal-delay-1">
-          Investimento que se paga na primeira semana.
+          Custa menos que um atendente. Vende mais que três.
         </h2>
         <p className="section-subtitle reveal reveal-delay-2">
-          Quanto custa perder vendas no WhatsApp e se atrapalhar com as entregas? A Masca.ai custa menos
-          que o salário de um atendente — e trabalha 24 horas aumentando o seu ticket médio.
+          Quanto você perde por mês com vendas não respondidas e estoque descontrolado?
+          A Masca se paga na primeira semana — e trabalha 24h sem folga.
         </p>
 
         <div className="pricing-grid">

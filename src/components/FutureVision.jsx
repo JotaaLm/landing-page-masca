@@ -25,7 +25,7 @@ export default function HowItWorks() {
   return (
     <section className="journey-section" id="jornada">
       <div className="container">
-        <p className="section-label reveal">// 04. JORNADA DE COMPRA</p>
+        <p className="section-label reveal">JORNADA DE COMPRA</p>
         <h2 className="section-title reveal reveal-delay-1">
           Do primeiro "oi" ao pedido entregue.
         </h2>

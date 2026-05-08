@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
 export default function Navbar() {
@@ -11,12 +11,37 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.navbar')) closeMenu();
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [menuOpen, closeMenu]);
+
+  function handleNavClick(e, targetId) {
+    e.preventDefault();
+    closeMenu();
+    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
   function handleCtaClick() {
-    setMenuOpen(false);
+    closeMenu();
     trackEvent('cta_click_testar_navbar');
     trackInterestClick('navbar');
     document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
   }
+
+  const navLinks = [
+    { label: 'Problema', target: 'diagnostico' },
+    { label: 'Antes & Depois', target: 'antes-depois' },
+    { label: 'Como funciona', target: 'anatomia' },
+    { label: 'Diferenciais', target: 'diferenciais' },
+    { label: 'Planos', target: 'precos' },
+  ];
 
   return (
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`} id="navbar">
@@ -27,13 +52,16 @@ export default function Navbar() {
             <path d="M 360 340 L 440 460" stroke="#0A0A0A" strokeWidth="120" />
             <path d="M 359 338.5 L 441 461.5" stroke="#FF5A00" strokeWidth="90" />
           </svg>
-          masca.ai
+          masca
         </a>
 
         <button
           className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menu"
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuOpen(!menuOpen);
+          }}
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={menuOpen}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -44,9 +72,13 @@ export default function Navbar() {
         </button>
 
         <ul className={`nav-links${menuOpen ? ' open' : ''}`}>
-          <li><a href="#diagnostico" onClick={() => setMenuOpen(false)}>Diagnóstico</a></li>
-          <li><a href="#anatomia" onClick={() => setMenuOpen(false)}>Como funciona</a></li>
-          <li><a href="#precos" onClick={() => setMenuOpen(false)}>Planos</a></li>
+          {navLinks.map((link) => (
+            <li key={link.target}>
+              <a href={`#${link.target}`} onClick={(e) => handleNavClick(e, link.target)}>
+                {link.label}
+              </a>
+            </li>
+          ))}
           <li>
             <button className="nav-cta" onClick={handleCtaClick} id="nav-cta-testar">
               Testar Gratuitamente

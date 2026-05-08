@@ -6,9 +6,9 @@ export default function PainPoints() {
           <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
         </svg>
       ),
-      title: 'WhatsApp congestionado e vendas perdidas',
-      text: 'Você responde as mesmas dúvidas o dia inteiro. Nos horários de pico ou fins de semana, o cliente sem resposta imediata acaba comprando do concorrente.',
-      stat: 'Atendimento manual limita o seu faturamento',
+      title: 'Cliente mandou mensagem às 23h. Ninguém viu.',
+      text: 'Enquanto você descansa, seu concorrente que tem atendimento automático já fechou a venda. Cada mensagem sem resposta é uma venda que nunca mais volta.',
+      stat: '78% dos clientes compram de quem responde primeiro',
     },
     {
       icon: (
@@ -19,31 +19,32 @@ export default function PainPoints() {
           <line x1="16" y1="17" x2="8" y2="17" />
         </svg>
       ),
-      title: 'Estoque desorganizado e sem upsell',
-      text: 'Sem uma integração inteligente, você vende o que não tem em estoque e perde oportunidades claras de recomendar produtos complementares para aumentar o ticket.',
-      stat: 'Oportunidades de lucro ignoradas',
+      title: 'Vendeu 5, mas só tinha 2 em estoque.',
+      text: 'Resultado: ligar pro cliente, pedir desculpa e devolver o dinheiro. Estoque desatualizado queima sua reputação e come seu lucro toda semana.',
+      stat: 'Cada venda furada custa 3x o valor do produto',
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
         </svg>
       ),
-      title: 'A gestão do delivery virou um caos',
-      text: 'Acompanhar pedidos, repassar endereços e organizar o fluxo de entregas consome horas da sua operação. A logística e o atendimento não se conversam.',
-      stat: 'Processos manuais travam a sua escala',
+      title: 'Seus atendentes vendem só o que o cliente pede.',
+      text: 'Cliente pediu um produto e levou só ele. Sem sugestão de combo, sem oferta complementar. Seu ticket médio estagna enquanto a margem poderia ser 30% maior.',
+      stat: 'Sem upsell automático = dinheiro na mesa todo dia',
     },
   ];
 
   return (
     <section className="pain-section" id="diagnostico">
       <div className="container">
-        <p className="section-label reveal">// 01. DIAGNÓSTICO</p>
+        <p className="section-label reveal">O PROBLEMA</p>
         <h2 className="section-title reveal reveal-delay-1">
-          O que está travando a sua loja e o seu delivery
+          Isso está acontecendo na sua loja agora.
         </h2>
         <p className="section-subtitle reveal reveal-delay-2">
-          Se você gerencia um alto volume de mensagens e entregas, já sente esses gargalos. A questão não é se — é quando eles vão parar seu crescimento.
+          Se você vende pelo WhatsApp e faz delivery, pelo menos um desses cenários está te custando dinheiro hoje.
         </p>
 
         <div className="pain-grid">

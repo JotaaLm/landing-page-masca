@@ -1,38 +1,54 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
 export default function Hero() {
   const video1Ref = useRef(null);
   const video2Ref = useRef(null);
+  const activeRef = useRef(0);
+
+  const startCrossfade = useCallback(() => {
+    const videos = [video1Ref.current, video2Ref.current];
+    const current = videos[activeRef.current];
+    const next = videos[1 - activeRef.current];
+
+    if (!current || !next) return;
+
+    next.currentTime = 0;
+    next.play().catch(() => {});
+
+    next.style.opacity = '0.3';
+    current.style.opacity = '0';
+
+    activeRef.current = 1 - activeRef.current;
+
+    setTimeout(() => current.pause(), 1200);
+  }, []);
 
   useEffect(() => {
     const v1 = video1Ref.current;
     const v2 = video2Ref.current;
     if (!v1 || !v2) return;
 
-    // Estado inicial: V1 visível e tocando, V2 oculto e pausado
     v1.style.opacity = '0.3';
     v2.style.opacity = '0';
-    v1.play().catch(e => console.log(e));
+    v1.play().catch(() => {});
+
+    let scheduled = false;
 
     const handleTimeUpdate = (e) => {
-      const activeVid = e.target;
-      const nextVid = activeVid === v1 ? v2 : v1;
-      
-      // Quando faltar 1 segundo para acabar, fazemos um Crossfade (transição suave)
-      if (activeVid.duration && activeVid.currentTime >= activeVid.duration - 1.0) {
-        if (nextVid.paused) {
-          nextVid.currentTime = 0;
-          nextVid.play();
-          // Inicia o fade cruzado via CSS transition
-          nextVid.style.opacity = '0.3';
-          activeVid.style.opacity = '0';
-        }
+      const vid = e.target;
+      if (!vid.duration || scheduled) return;
+
+      const remaining = vid.duration - vid.currentTime;
+      if (remaining <= 1.2 && remaining > 0) {
+        scheduled = true;
+        startCrossfade();
       }
     };
 
     const handleEnded = (e) => {
       e.target.pause();
+      scheduled = false;
     };
 
     v1.addEventListener('timeupdate', handleTimeUpdate);
@@ -46,7 +62,7 @@ export default function Hero() {
       v1.removeEventListener('ended', handleEnded);
       v2.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [startCrossfade]);
 
   function handleCtaClick() {
     trackEvent('cta_click_testar_hero');
@@ -57,20 +73,20 @@ export default function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="hero-video-bg">
-        <video 
+        <video
           ref={video1Ref}
           autoPlay
-          muted 
-          playsInline 
+          muted
+          playsInline
           className="hero-video-element"
           aria-hidden="true"
         >
           <source src="/mp_.mp4" type="video/mp4" />
         </video>
-        <video 
+        <video
           ref={video2Ref}
-          muted 
-          playsInline 
+          muted
+          playsInline
           className="hero-video-element"
           aria-hidden="true"
         >
@@ -86,27 +102,31 @@ export default function Hero() {
             Beta Fechado — Vagas Limitadas
           </div>
 
-          <p className="hero-tag reveal reveal-delay-1">// MASCA.AI — ASSISTENTE DE VENDAS E GESTÃO PARA VAREJO E DELIVERY</p>
+          <p className="hero-tag reveal reveal-delay-1">SUA LOJA VIRTUAL COMPLETA DENTRO DO WHATSAPP — COM VENDEDOR IA E GESTÃO DE ESTOQUE</p>
 
           <h1 className="reveal reveal-delay-2">
-            Transforme seu WhatsApp em uma{' '}
-            <span className="highlight">máquina de vendas automática.</span>
+            Seu WhatsApp vira uma{' '}
+            <span className="highlight">máquina de vendas que nunca dorme.</span>
           </h1>
 
           <p className="hero-sub reveal reveal-delay-3">
-            A IA do Masca atende, gerencia seu estoque e fecha pedidos 24h por dia. Chega de perder vendas por demora no atendimento.
+            Um vendedor IA que atende seus clientes em 5 segundos, recomenda
+            produtos complementares e fecha pedidos no automático — enquanto
+            o painel cuida do estoque e da logística para você.
           </p>
 
-          <button
-            className="hero-cta reveal reveal-delay-4"
-            onClick={handleCtaClick}
-            id="hero-cta-testar"
-          >
-            Testar Gratuitamente
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </button>
+          <div className="hero-ctas reveal reveal-delay-4">
+            <button
+              className="hero-cta"
+              onClick={handleCtaClick}
+              id="hero-cta-testar"
+            >
+              Começar Teste Grátis
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
 
           <div className="hero-metrics reveal reveal-delay-4">
             <div className="hero-metric">
@@ -123,7 +143,7 @@ export default function Hero() {
             </div>
             <div className="hero-metric">
               <span className="hero-metric-value">0</span>
-              <span className="hero-metric-label">Atrasos no Delivery</span>
+              <span className="hero-metric-label">Vendas furadas por mês</span>
             </div>
           </div>
         </div>

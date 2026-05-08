@@ -6,8 +6,8 @@ export default function Differentials() {
           <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
         </svg>
       ),
-      title: 'Conexão e Atendimento Estáveis',
-      text: 'Integração sólida sem gambiarras. Esqueça sistemas lentos e riscos de perder seu número. A nossa tecnologia garante que o seu negócio nunca pare de vender.',
+      title: 'Sem gambiarra, sem queda',
+      text: 'Integração robusta com o WhatsApp — nada de APIs não-oficiais que travam. Sua operação roda 24/7 sem risco de perder o número ou cair no pico de vendas.',
     },
     {
       icon: (
@@ -18,8 +18,8 @@ export default function Differentials() {
           <path d="M16 3.13a4 4 0 010 7.75" />
         </svg>
       ),
-      title: 'Human-in-the-loop',
-      text: 'A IA trabalha com você. Se o cliente pedir um desconto especial ou houver uma dúvida atípica, a IA escala para você aprovar. Controle total da operação sem gargalos.',
+      title: 'Você aprova, a IA executa',
+      text: 'A IA trabalha com você. Se o cliente pedir um desconto especial ou houver uma dúvida atípica, a IA pausa e aguarda sua aprovação. Controle total da operação sem gargalos.',
     },
     {
       icon: (
@@ -27,8 +27,8 @@ export default function Differentials() {
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
       ),
-      title: 'Recomendações Seguras e Precisas',
-      text: 'A IA respeita as regras do seu negócio e analisa o estoque para oferecer a melhor combinação de produtos, sempre priorizando o aumento do ticket médio.',
+      title: 'Upsell que respeita seu estoque',
+      text: 'A IA consulta o estoque em tempo real antes de recomendar. Só sugere o que você tem. Resultado: mais vendas por pedido, zero frustração do cliente.',
     },
     {
       icon: (
@@ -47,8 +47,8 @@ export default function Differentials() {
           <path d="M7 11V7a5 5 0 0110 0v4" />
         </svg>
       ),
-      title: 'Plataforma Segura e Escalável',
-      text: 'Seus dados e de seus clientes estão sempre protegidos. Arquitetura em nuvem desenhada para aguentar o volume das suas campanhas sem cair.',
+      title: 'Aguenta seu pico de vendas',
+      text: 'Promoção bombou? Sem problema. Arquitetura em nuvem que escala automaticamente para aguentar qualquer volume — sem lentidão, sem queda.',
     },
     {
       icon: (
@@ -65,12 +65,12 @@ export default function Differentials() {
   return (
     <section className="diff-section" id="diferenciais">
       <div className="container">
-        <p className="section-label reveal">// 03. POR QUE A MASCA.AI</p>
+        <p className="section-label reveal">DIFERENCIAIS</p>
         <h2 className="section-title reveal reveal-delay-1">
-          Tudo que a sua operação de varejo precisa. Nada que não precisa.
+          Por que lojistas escolhem a Masca
         </h2>
         <p className="section-subtitle reveal reveal-delay-2">
-          Cada funcionalidade foi desenhada para resolver dores reais de quem atende muitos clientes e gerencia um alto volume de entregas.
+          Cada detalhe foi pensado para quem vende pelo WhatsApp e precisa de controle total da operação.
         </p>
 
         <div className="diff-grid">
