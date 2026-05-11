@@ -81,7 +81,7 @@ export default function Hero() {
           className="hero-video-element"
           aria-hidden="true"
         >
-          <source src="/mp_.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}mp_.mp4`} type="video/mp4" />
         </video>
         <video
           ref={video2Ref}
@@ -90,7 +90,7 @@ export default function Hero() {
           className="hero-video-element"
           aria-hidden="true"
         >
-          <source src="/mp_.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}mp_.mp4`} type="video/mp4" />
         </video>
         <div className="hero-video-overlay" />
       </div>
