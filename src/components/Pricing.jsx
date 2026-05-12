@@ -3,45 +3,56 @@ import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 export default function Pricing() {
   const plans = [
     {
-      name: 'Agent',
-      tag: 'MAIS POPULAR',
-      price: '497',
-      period: '/mês',
-      description: 'Tudo que você precisa para vender pelo WhatsApp com IA e gerenciar sua operação no painel.',
+      name: 'Start',
+      tag: 'PARA COMEÇAR',
+      price: '297',
+      description: 'Para lojas que querem validar atendimento IA no WhatsApp com controle simples de pedidos.',
       features: [
-        '1 conexão de WhatsApp',
-        'Atendente Virtual 24/7 com recomendação',
-        'Painel web completo (catálogo, pedidos, logística)',
-        'Aprovação manual quando necessário',
-        'Configuração de frete por região',
-        'Feed de conversas em tempo real',
-        'Integração direta com o seu estoque',
-        'Suporte prioritário',
+        '1 número de WhatsApp conectado',
+        'Atendimento IA para perguntas frequentes',
+        'Cadastro de produtos e disponibilidade',
+        'Histórico das conversas',
+        'Suporte na ativação inicial',
       ],
-      highlighted: true,
+    },
+    {
+      name: 'Growth',
+      tag: 'MAIS INDICADO',
+      price: '497',
+      description: 'Para operações que precisam vender mais, organizar estoque e aumentar ticket médio.',
+      features: [
+        'Tudo do Start',
+        'Recomendações e combos automáticos',
+        'Gestão de estoque em tempo real',
+        'Pedidos estruturados no painel',
+        'Transferência para atendimento humano',
+      ],
+      featured: true,
     },
     {
       name: 'Scale',
-      tag: 'PARA CRESCER',
+      tag: 'PARA ESCALAR',
       price: '997',
-      period: '/mês',
-      description: 'Para quem tem múltiplos atendentes e precisa de mais conexões e relatórios avançados.',
+      description: 'Para lojas com maior volume, equipe de atendimento e necessidade de mais controle operacional.',
       features: [
-        'Tudo do plano Agent, mais:',
-        'Até 3 conexões de WhatsApp',
-        'Multi-atendente no painel',
-        'Relatórios avançados de conversão e upsell',
-        'API para integrações futuras',
-        'Onboarding dedicado com o time técnico',
-        'Suporte responde em até 2h',
-        'Prioridade em novas features',
+        'Tudo do Growth',
+        'Múltiplos atendentes no painel',
+        'Relatórios avançados',
+        'Regras comerciais personalizadas',
+        'Onboarding acompanhado',
       ],
-      highlighted: false,
     },
   ];
 
-  function handlePlanClick(planName) {
-    trackEvent('pricing_plano_selecionado', { plan: planName });
+  const faqs = [
+    ['Preciso cadastrar cartão para testar?', 'Não. O teste é sem cartão e sem cobrança automática.'],
+    ['Quanto tempo leva para ativar?', 'A configuração inicial pode ser feita rapidamente, com apoio do time para conectar WhatsApp, catálogo e regras da loja.'],
+    ['Posso assumir uma conversa manualmente?', 'Sim. A IA pode pausar e transferir a conversa para um atendente quando houver exceção ou oportunidade especial.'],
+    ['Funciona com meu estoque atual?', 'A proposta é centralizar produtos, disponibilidade e pedidos no painel da Masca para reduzir erro operacional.'],
+  ];
+
+  function handleClick(planName = 'pricing') {
+    trackEvent('cta_click_pricing', { plan: planName });
     trackInterestClick('pricing', { plan: planName });
     document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
   }
@@ -49,56 +60,33 @@ export default function Pricing() {
   return (
     <section className="pricing-section" id="precos">
       <div className="container">
-        <p className="section-label reveal">PLANOS</p>
-        <h2 className="section-title reveal reveal-delay-1">
-          Custa menos que um atendente. Vende mais que três.
-        </h2>
-        <p className="section-subtitle reveal reveal-delay-2">
-          Quanto você perde por mês com vendas não respondidas e estoque descontrolado?
-          A Masca se paga na primeira semana — e trabalha 24h sem folga.
-        </p>
+        <div className="plans-heading reveal">
+          <p className="section-label centered">PLANOS</p>
+          <h2 className="section-title centered">Escolha como a Masca entra na sua operação</h2>
+          <p className="section-subtitle centered">
+            Comece com atendimento inteligente e evolua para uma rotina completa de vendas, estoque e delivery.
+          </p>
+        </div>
 
-        <div className="pricing-grid">
-          {plans.map((plan, i) => (
-            <article
-              key={plan.name}
-              className={`pricing-card${plan.highlighted ? ' pricing-highlighted' : ''} reveal reveal-delay-${i + 1}`}
-              id={`pricing-${plan.name.toLowerCase()}`}
-            >
-              {plan.highlighted && (
-                <div className="pricing-badge">{plan.tag}</div>
-              )}
-              {!plan.highlighted && (
-                <div className="pricing-tag">{plan.tag}</div>
-              )}
-
-              <h3 className="pricing-plan-name">{plan.name}</h3>
-              <p className="pricing-desc">{plan.description}</p>
-
-              <div className="pricing-value">
-                <span className="pricing-currency">R$</span>
-                <span className="pricing-amount">{plan.price}</span>
-                <span className="pricing-period">{plan.period}</span>
+        <div className="plans-grid">
+          {plans.map((plan, index) => (
+            <article className={`plan-card reveal reveal-delay-${index + 1}${plan.featured ? ' featured' : ''}`} key={plan.name}>
+              <span className="plan-tag">{plan.tag}</span>
+              <h3>{plan.name}</h3>
+              <p>{plan.description}</p>
+              <div className="plan-price">
+                <small>R$</small>
+                <strong>{plan.price}</strong>
+                <span>/mês</span>
               </div>
-
-              <ul className="pricing-features">
+              <ul>
                 {plan.features.map((feature) => (
-                  <li key={feature}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {feature}
-                  </li>
+                  <li key={feature}>{feature}</li>
                 ))}
               </ul>
-
-              <button
-                className={`pricing-cta${plan.highlighted ? ' pricing-cta-primary' : ''}`}
-                onClick={() => handlePlanClick(plan.name)}
-                id={`btn-plan-${plan.name.toLowerCase()}`}
-              >
-                Testar Gratuitamente
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <button className="plan-cta" onClick={() => handleClick(plan.name)}>
+                Testar gratuitamente
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </button>
@@ -106,14 +94,15 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="pricing-note reveal">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="16" x2="12" y2="12" />
-            <line x1="12" y1="8" x2="12.01" y2="8" />
-          </svg>
-          Valores de lançamento para os primeiros design partners. Sem multa, cancele quando quiser.
-        </p>
+        <div className="faq-wrap">
+          <p className="section-label centered reveal">PERGUNTAS FREQUENTES</p>
+          {faqs.map(([question, answer], index) => (
+            <details className={`faq-item reveal reveal-delay-${(index % 3) + 1}`} key={question}>
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   );

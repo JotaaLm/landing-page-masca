@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { trackEvent } from '../hooks/useAnalytics';
 import { submitWaitlistLead } from '../lib/leads';
 
@@ -18,7 +18,6 @@ export default function WaitlistModal({ isOpen, onClose }) {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  // Fecha com ESC
   useEffect(() => {
     function handleKey(e) {
       if (e.key === 'Escape') onClose();
@@ -40,17 +39,16 @@ export default function WaitlistModal({ isOpen, onClose }) {
     };
 
     trackEvent('waitlist_email_enviado', { email_domain: email.split('@')[1] });
-
     const result = await submitWaitlistLead(data);
 
     setLoading(false);
     if (result.success) {
       setSubmitted(true);
-    } else {
-      setError(result.error?.includes('duplicate')
-        ? 'Este e-mail já está na lista de espera!'
-        : 'Erro ao salvar. Tente novamente.');
+      return;
     }
+    setError(result.error?.includes('duplicate')
+      ? 'Este e-mail já está na lista de espera!'
+      : 'Erro ao salvar. Tente novamente.');
   }
 
   if (!isOpen) return null;
@@ -72,9 +70,9 @@ export default function WaitlistModal({ isOpen, onClose }) {
                 <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
             </div>
-            <h3>Você está na lista! 🎉</h3>
+            <h3>Você está na lista!</h3>
             <p>
-              Assim que liberarmos novas vagas no Beta fechado,
+              Assim que liberarmos novas vagas no beta fechado,
               você será o primeiro a saber. Fique de olho no seu e-mail.
             </p>
           </div>
@@ -84,10 +82,10 @@ export default function WaitlistModal({ isOpen, onClose }) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              Beta Fechado — Vagas Limitadas
+              Beta fechado — vagas limitadas
             </div>
 
-            <h2>Seja avisado quando liberarmos novas vagas para o Beta</h2>
+            <h2>Seja avisado quando liberarmos novas vagas para o beta</h2>
 
             <p className="modal-desc">
               Tenha acesso antecipado à Masca para testar o vendedor IA
@@ -110,7 +108,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
                     <span className="modal-spinner" />
                   ) : (
                     <>
-                      Testar Gratuitamente
+                      Testar gratuitamente
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>

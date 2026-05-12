@@ -11,6 +11,7 @@ import Differentials from './components/Differentials';
 import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
+import ComparisonTable from './components/ComparisonTable';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -27,10 +28,11 @@ export default function App() {
       <main>
         <Hero />
         <PainPoints />
-        <BeforeAfter />
         <Anatomy />
+        <BeforeAfter />
         <Differentials />
         <SocialProof />
+        <ComparisonTable />
         <Pricing />
         <ContactForm />
       </main>

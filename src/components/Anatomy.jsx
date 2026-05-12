@@ -1,54 +1,79 @@
+import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
+
 export default function Anatomy() {
-  const pillars = [
+  const solutions = [
     {
-      num: '01',
-      tag: 'LOJA VIRTUAL NO WHATSAPP',
-      title: 'Sua vitrine dentro da conversa',
-      text: 'O cliente acessa seu catálogo completo direto no WhatsApp — com fotos, preços e descrições. Ele escolhe, monta o pedido e finaliza sem sair do chat.',
-      stack: ['Catálogo Digital', 'Fotos de Produto', 'Carrinho no Chat', 'Checkout Direto'],
+      eyebrow: 'PARA SEU WHATSAPP',
+      title: 'Vendedor IA que atende e fecha pedidos',
+      text: 'Responde em segundos, entende o pedido, sugere complementos e chama um humano quando precisa.',
+      cta: 'Começar teste grátis',
+      featured: true,
     },
     {
-      num: '02',
-      tag: 'VENDEDOR IA 24/7',
-      title: 'Atende, recomenda e fecha a venda',
-      text: 'A IA conversa de forma natural, tira dúvidas, sugere produtos complementares e finaliza o pedido com endereço e frete — enquanto você dorme ou cuida do negócio.',
-      stack: ['Atendimento Instantâneo', 'Upsell Inteligente', 'Frete Automático', 'Controle Humano'],
+      eyebrow: 'PARA SUA OPERAÇÃO',
+      title: 'Estoque sincronizado em tempo real',
+      text: 'Cada venda atualiza o painel automaticamente para evitar ruptura, pedido furado e retrabalho.',
+      cta: 'Conhecer solução',
     },
     {
-      num: '03',
-      tag: 'PAINEL DE GESTÃO',
-      title: 'Estoque, pedidos e entregas num só lugar',
-      text: 'Controle estoque em tempo real, acompanhe cada pedido por status e gerencie entregas — tudo sincronizado com o WhatsApp. Vendeu? O estoque atualiza sozinho.',
-      stack: ['Estoque em Tempo Real', 'Gestão de Pedidos', 'Logística', 'Relatórios'],
+      eyebrow: 'PARA DELIVERY',
+      title: 'Pedidos organizados até a entrega',
+      text: 'Endereço, status, frete e histórico ficam em uma jornada única do WhatsApp ao painel.',
+      cta: 'Ver funcionamento',
     },
   ];
 
-  return (
-    <section className="anatomy-section" id="anatomia">
-      <div className="container">
-        <p className="section-label reveal">COMO FUNCIONA</p>
-        <h2 className="section-title reveal reveal-delay-1">
-          Três módulos. Uma plataforma completa.
-        </h2>
-        <p className="section-subtitle reveal reveal-delay-2">
-          Loja, vendedor IA e gestão — tudo conectado. Cada módulo funciona
-          integrado para você vender mais sem esforço.
-        </p>
+  function handleClick(source) {
+    trackEvent(`cta_click_${source}`);
+    trackInterestClick(source);
+    document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
+  }
 
-        <div className="anatomy-agents">
-          {pillars.map((pillar, i) => (
-            <article key={i} className={`agent-card reveal reveal-delay-${i + 1}`}>
-              <div className="agent-number" aria-hidden="true">{pillar.num}</div>
-              <div className="agent-content">
-                <div className="agent-tag">{pillar.tag}</div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-                <div className="agent-stack">
-                  {pillar.stack.map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
+  return (
+    <section className="solutions-section" id="anatomia">
+      <div className="container">
+        <span id="solucoes" className="anchor-target" aria-hidden="true" />
+        <div className="solution-grid">
+          {solutions.map((solution, index) => (
+            <article className={`solution-card reveal reveal-delay-${index + 1}${solution.featured ? ' featured' : ''}`} key={solution.title}>
+              <div className="solution-visual" aria-hidden="true">
+                <div className="mini-chat">
+                  <span />
+                  <span />
+                  <span />
                 </div>
               </div>
+              <p>{solution.eyebrow}</p>
+              <h3>{solution.title}</h3>
+              <small>{solution.text}</small>
+              <button onClick={() => handleClick(`solution_${index + 1}`)}>
+                {solution.cta}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </article>
+          ))}
+        </div>
+
+        <div className="section-heading reveal">
+          <p className="section-label">CONHEÇA A MASCA</p>
+          <h2 className="section-title">Otimização completa da conversa até a entrega</h2>
+        </div>
+
+        <div className="feature-lattice">
+          {[
+            ['Capture e responda', 'Abordagem instantânea para não deixar o cliente esperando.'],
+            ['Recomende melhor', 'Sugestões de combos e produtos complementares durante a conversa.'],
+            ['Controle estoque', 'Venda apenas o que existe e evite cancelamentos por ruptura.'],
+            ['Distribua pedidos', 'Organize status, prioridade e repasse para o time certo.'],
+            ['Analise os resultados', 'Entenda atendimentos, produtos mais pedidos e gargalos.'],
+            ['Assuma quando quiser', 'Humano entra na conversa sem perder contexto.'],
+          ].map(([title, text], index) => (
+            <article className={`lattice-item reveal reveal-delay-${(index % 3) + 1}`} key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
             </article>
           ))}
         </div>
