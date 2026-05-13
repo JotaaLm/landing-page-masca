@@ -88,8 +88,8 @@ export default function WaitlistModal({ isOpen, onClose }) {
             <h2>Seja avisado quando liberarmos novas vagas para o beta</h2>
 
             <p className="modal-desc">
-              Tenha acesso antecipado à Masca para testar o vendedor IA
-              integrado ao estoque no seu próprio WhatsApp. Sem compromisso, sem cartão.
+              Tenha acesso antecipado à Masca para usar o vendedor IA
+              integrado ao estoque no seu próprio WhatsApp.
             </p>
 
             <form onSubmit={handleSubmit} className="modal-form" id="waitlist-form">
@@ -108,7 +108,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
                     <span className="modal-spinner" />
                   ) : (
                     <>
-                      Testar gratuitamente
+                      Reservar vaga no beta
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>

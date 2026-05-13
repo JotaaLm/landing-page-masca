@@ -78,7 +78,7 @@ export default function Navbar() {
             </a>
           ))}
           <button className="nav-cta" onClick={() => handleCtaClick('navbar')}>
-            Testar grátis
+            Reservar vaga
           </button>
         </div>
       </div>

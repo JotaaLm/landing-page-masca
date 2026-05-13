@@ -45,7 +45,7 @@ export default function Pricing() {
   ];
 
   const faqs = [
-    ['Preciso cadastrar cartão para testar?', 'Não. O teste é sem cartão e sem cobrança automática.'],
+    ['Como faço para reservar minha vaga?', 'Preencha o formulário e nosso time entra em contato para alinhar o acesso ao beta e os próximos passos.'],
     ['Quanto tempo leva para ativar?', 'A configuração inicial pode ser feita rapidamente, com apoio do time para conectar WhatsApp, catálogo e regras da loja.'],
     ['Posso assumir uma conversa manualmente?', 'Sim. A IA pode pausar e transferir a conversa para um atendente quando houver exceção ou oportunidade especial.'],
     ['Funciona com meu estoque atual?', 'A proposta é centralizar produtos, disponibilidade e pedidos no painel da Masca para reduzir erro operacional.'],
@@ -85,7 +85,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <button className="plan-cta" onClick={() => handleClick(plan.name)}>
-                Testar gratuitamente
+                Reservar vaga no beta
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

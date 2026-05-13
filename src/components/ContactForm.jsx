@@ -48,8 +48,8 @@ export default function ContactForm() {
             estoque, regras de entrega e pontos onde a IA pode gerar mais vendas.
           </p>
           <div className="contact-trust">
-            <span>Sem cartão de crédito</span>
-            <span>Sem cobrança automática</span>
+            <span>Vagas limitadas no beta</span>
+            <span>Ativação acompanhada</span>
             <span>Suporte na ativação</span>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function ContactForm() {
             ))}
 
             <button type="submit" className="form-submit" disabled={loading}>
-              {loading ? 'Enviando...' : 'Quero testar grátis'}
+              {loading ? 'Enviando...' : 'Quero reservar vaga'}
             </button>
             {error && <p className="form-error">{error}</p>}
           </form>

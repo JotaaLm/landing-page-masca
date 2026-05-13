@@ -1,4 +1,5 @@
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
+import MascotRobot from './MascotRobot';
 
 export default function BeforeAfter() {
   const oldWay = [
@@ -44,6 +45,7 @@ export default function BeforeAfter() {
           </article>
 
           <article className="compare-panel new reveal reveal-delay-2">
+            <MascotRobot className="compare-mascot" />
             <p>COM A MASCA</p>
             <h3>O jeito novo</h3>
             <ul>
@@ -54,7 +56,7 @@ export default function BeforeAfter() {
 
         <div className="center-cta reveal reveal-delay-3">
           <button className="hero-cta" onClick={handleClick}>
-            Iniciar 14 dias grátis
+            Reservar vaga no beta
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

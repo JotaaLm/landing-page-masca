@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
+import MascotRobot from './MascotRobot';
 
 export default function Hero() {
   const phrases = useMemo(() => [
@@ -80,14 +81,7 @@ export default function Hero() {
       <div className="hero-sheen" aria-hidden="true" />
       <div className="container hero-container">
         <div className="hero-orbit reveal">
-          <div className="floating-product floating-product-left">
-            <span>Aumento</span>
-            <small>do ticket médio</small>
-          </div>
-          <div className="floating-product floating-product-right">
-            <span>24/7</span>
-            <small>vendas ativas</small>
-          </div>
+          <MascotRobot className="hero-mascot" />
         </div>
 
         <button
@@ -131,7 +125,7 @@ export default function Hero() {
             para sua loja vender mesmo quando o time está ocupado.
           </p>
           <button className="hero-cta reveal reveal-delay-4" onClick={handleCtaClick}>
-            Começar teste grátis
+            Reservar vaga no beta
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
