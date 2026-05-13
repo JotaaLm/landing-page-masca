@@ -9,7 +9,7 @@ export default function PainPoints() {
     <section className="pain-section" id="diagnostico">
       <div className="container pain-wrap">
         <div className="stat-hero reveal">
-          <h2><span>7 em cada 10</span> pedidos iniciados no WhatsApp não viram venda</h2>
+          <h2><span>7 em cada 10</span> pedidos iniciados no WhatsApp não viram vendas</h2>
           <p>Quando resposta, estoque e fechamento dependem de trabalho manual, a operação perde dinheiro exatamente no momento em que o cliente queria comprar.</p>
         </div>
 
