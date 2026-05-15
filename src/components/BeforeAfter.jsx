@@ -32,7 +32,7 @@ export default function BeforeAfter() {
           Diga adeus ao jeito antigo de vender pelo WhatsApp
         </h2>
         <p className="section-subtitle centered reveal reveal-delay-2">
-          A Masca transforma conversas soltas em uma operação conectada, rápida e mensurável.
+          O Masca transforma conversas soltas em uma operação conectada, rápida e mensurável.
         </p>
 
         <div className="compare-panels">

@@ -3,7 +3,7 @@ export default function SocialProof() {
     {
       name: 'Marina Alves',
       role: 'Operadora de delivery',
-      quote: 'A maior diferença foi parar de perder cliente por demora. A Masca responde, monta o pedido e deixa meu time só validar o que importa.',
+      quote: 'A maior diferença foi parar de perder cliente por demora. O Masca responde, monta o pedido e deixa meu time só validar o que importa.',
       metricA: '+41%',
       labelA: 'pedidos no WhatsApp',
       metricB: '18%',

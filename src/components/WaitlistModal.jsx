@@ -88,7 +88,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
             <h2>Seja avisado quando liberarmos novas vagas para o beta</h2>
 
             <p className="modal-desc">
-              Tenha acesso antecipado à Masca para usar o vendedor IA
+              Tenha acesso antecipado ao Masca para usar o vendedor IA
               integrado ao estoque no seu próprio WhatsApp.
             </p>
 

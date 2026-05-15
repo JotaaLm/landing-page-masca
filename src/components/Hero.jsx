@@ -121,7 +121,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
-            A Masca atende clientes em segundos, recomenda produtos, monta pedidos e sincroniza o estoque
+            O Masca atende clientes em segundos, recomenda produtos, monta pedidos e sincroniza o estoque
             para sua loja vender mesmo quando o time está ocupado.
           </p>
           <button className="hero-cta reveal reveal-delay-4" onClick={handleCtaClick}>

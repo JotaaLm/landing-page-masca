@@ -19,7 +19,7 @@ export default function Differentials() {
     {
       tag: 'ESTOQUE E UPSELL',
       title: 'Recomendações que respeitam sua operação',
-      text: 'A Masca sugere apenas produtos disponíveis e usa combos para aumentar o valor do carrinho.',
+      text: 'O Masca sugere apenas produtos disponíveis e usa combos para aumentar o valor do carrinho.',
       metric: '+30%',
       metricLabel: 'potencial de ticket médio',
       visual: 'upsell',

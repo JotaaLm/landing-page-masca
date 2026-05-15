@@ -30,7 +30,7 @@ export default function HowItWorks() {
           Do primeiro "oi" ao pedido entregue.
         </h2>
         <p className="section-subtitle reveal reveal-delay-2">
-          Veja como uma venda flui na Masca.ai — garantindo que a sua loja feche mais pedidos e organize as entregas sem depender da sua atenção constante.
+          Veja como uma venda flui no Masca.ai — garantindo que a sua loja feche mais pedidos e organize as entregas sem depender da sua atenção constante.
         </p>
 
         <div className="journey-steps">

@@ -4,42 +4,37 @@ export default function Pricing() {
   const plans = [
     {
       name: 'Start',
-      tag: 'PARA COMEÇAR',
-      price: '297',
-      description: 'Para lojas que querem validar atendimento IA no WhatsApp com controle simples de pedidos.',
+      tag: 'NO SISTEMA DO MASCA',
+      price: '997',
+      priceSuffix: '/mês',
+      description: 'Para lojas que querem vender com atendimento IA e operar catálogo, pedidos, estoque, pagamentos e entregas dentro do sistema do Masca.',
       features: [
-        '1 número de WhatsApp conectado',
-        'Atendimento IA para perguntas frequentes',
-        'Cadastro de produtos e disponibilidade',
-        'Histórico das conversas',
+        'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
+        'Cadastro de produtos, categorias, preços e disponibilidade',
+        'Gestão de estoque e pedidos em tempo real',
+        'Carrinho, checkout, pagamentos e formas de entrega',
+        'Cupons, promoções, combos e aumento de ticket médio',
+        'Relatórios de vendas, clientes e produtos',
+        'Painel operacional com histórico de conversas',
         'Suporte na ativação inicial',
-      ],
-    },
-    {
-      name: 'Growth',
-      tag: 'MAIS INDICADO',
-      price: '497',
-      description: 'Para operações que precisam vender mais, organizar estoque e aumentar ticket médio.',
-      features: [
-        'Tudo do Start',
-        'Recomendações e combos automáticos',
-        'Gestão de estoque em tempo real',
-        'Pedidos estruturados no painel',
-        'Transferência para atendimento humano',
       ],
       featured: true,
     },
     {
-      name: 'Scale',
-      tag: 'PARA ESCALAR',
+      name: 'Integração',
+      tag: 'NO SEU SISTEMA ATUAL',
       price: '997',
-      description: 'Para lojas com maior volume, equipe de atendimento e necessidade de mais controle operacional.',
+      priceSuffix: '/mês + taxa de integração',
+      description: 'Para lojas que querem manter a operação no sistema atual e conectar o Masca como vendedor IA integrado ao catálogo, estoque e pedidos existentes.',
       features: [
-        'Tudo do Growth',
-        'Múltiplos atendentes no painel',
-        'Relatórios avançados',
-        'Regras comerciais personalizadas',
-        'Onboarding acompanhado',
+        'Todas as funcionalidades do plano Start',
+        'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
+        'Conexão com catálogo, estoque e pedidos do sistema atual',
+        'Regras comerciais, cupons, combos e recomendações da IA',
+        'Histórico de conversas e pedidos sincronizados',
+        'Transferência para atendimento humano quando necessário',
+        'Taxa de integração consultada conforme o sistema utilizado',
+        'Suporte técnico para implantação da integração',
       ],
     },
   ];
@@ -48,7 +43,8 @@ export default function Pricing() {
     ['Como faço para reservar minha vaga?', 'Preencha o formulário e nosso time entra em contato para alinhar o acesso ao beta e os próximos passos.'],
     ['Quanto tempo leva para ativar?', 'A configuração inicial pode ser feita rapidamente, com apoio do time para conectar WhatsApp, catálogo e regras da loja.'],
     ['Posso assumir uma conversa manualmente?', 'Sim. A IA pode pausar e transferir a conversa para um atendente quando houver exceção ou oportunidade especial.'],
-    ['Funciona com meu estoque atual?', 'A proposta é centralizar produtos, disponibilidade e pedidos no painel da Masca para reduzir erro operacional.'],
+    ['Funciona com meu estoque atual?', 'Sim. No plano Start, o estoque fica centralizado no sistema do Masca. No plano Integração, avaliamos o seu sistema atual e informamos a taxa de integração necessária.'],
+    ['A taxa de integração já está inclusa?', 'Não. O plano Integração custa R$ 997/mês e a taxa de integração deve ser consultada conforme o sistema usado pela loja.'],
   ];
 
   function handleClick(planName = 'pricing') {
@@ -62,22 +58,22 @@ export default function Pricing() {
       <div className="container">
         <div className="plans-heading reveal">
           <p className="section-label centered">PLANOS</p>
-          <h2 className="section-title centered">Escolha como a Masca entra na sua operação</h2>
+          <h2 className="section-title centered">Escolha como o Masca entra na sua operação</h2>
           <p className="section-subtitle centered">
-            Comece com atendimento inteligente e evolua para uma rotina completa de vendas, estoque e delivery.
+            Escolha operar tudo no sistema do Masca ou conectar nossa IA à estrutura que sua loja já usa.
           </p>
         </div>
 
         <div className="plans-grid">
-          {plans.map((plan, index) => (
-            <article className={`plan-card reveal reveal-delay-${index + 1}${plan.featured ? ' featured' : ''}`} key={plan.name}>
+          {plans.map((plan) => (
+            <article className={`plan-card${plan.featured ? ' featured' : ''}`} key={plan.name}>
               <span className="plan-tag">{plan.tag}</span>
               <h3>{plan.name}</h3>
               <p>{plan.description}</p>
               <div className="plan-price">
                 <small>R$</small>
                 <strong>{plan.price}</strong>
-                <span>/mês</span>
+                <span>{plan.priceSuffix}</span>
               </div>
               <ul>
                 {plan.features.map((feature) => (
