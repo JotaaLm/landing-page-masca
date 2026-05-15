@@ -95,7 +95,7 @@ export default function ContactForm() {
               <input
                 type="tel"
                 name="whatsapp"
-                placeholder="(81) 99538-0600"
+                placeholder="(00) 00000-0000"
                 value={whatsapp}
                 onChange={handleWhatsappChange}
                 inputMode="numeric"
