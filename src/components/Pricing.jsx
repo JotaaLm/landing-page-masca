@@ -1,41 +1,41 @@
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
 export default function Pricing() {
+  const sharedFeatures = [
+    'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
+    'Cadastro de produtos, categorias, preços e disponibilidade',
+    'Gestão de estoque e pedidos em tempo real',
+    'Carrinho, checkout, pagamentos e formas de entrega',
+    'Cupons, promoções, combos e aumento de ticket médio',
+    'Relatórios de vendas, clientes e produtos',
+    'Painel operacional com histórico de conversas',
+    'Transferência para atendimento humano quando necessário',
+    'Suporte na ativação inicial',
+  ];
+
   const plans = [
     {
-      name: 'Start',
+      name: 'Prime',
       tag: 'NO SISTEMA DO MASCA',
+      oldPrice: '1.297',
       price: '997',
       priceSuffix: '/mês',
+      promo: 'Preço beta limitado',
       description: 'Para lojas que querem vender com atendimento IA e operar catálogo, pedidos, estoque, pagamentos e entregas dentro do sistema do Masca.',
-      features: [
-        'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
-        'Cadastro de produtos, categorias, preços e disponibilidade',
-        'Gestão de estoque e pedidos em tempo real',
-        'Carrinho, checkout, pagamentos e formas de entrega',
-        'Cupons, promoções, combos e aumento de ticket médio',
-        'Relatórios de vendas, clientes e produtos',
-        'Painel operacional com histórico de conversas',
-        'Suporte na ativação inicial',
-      ],
+      features: sharedFeatures,
       featured: true,
     },
     {
-      name: 'Integração',
+      name: 'Connect',
       tag: 'NO SEU SISTEMA ATUAL',
+      oldPrice: '1.497',
       price: '997',
       priceSuffix: '/mês + taxa de integração',
-      description: 'Para lojas que querem manter a operação no sistema atual e conectar o Masca como vendedor IA integrado ao catálogo, estoque e pedidos existentes.',
-      features: [
-        'Todas as funcionalidades do plano Start',
-        'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
-        'Conexão com catálogo, estoque e pedidos do sistema atual',
-        'Regras comerciais, cupons, combos e recomendações da IA',
-        'Histórico de conversas e pedidos sincronizados',
-        'Transferência para atendimento humano quando necessário',
-        'Taxa de integração consultada conforme o sistema utilizado',
-        'Suporte técnico para implantação da integração',
-      ],
+      promo: 'Preço beta limitado',
+      description: 'Para lojas que querem as mesmas funcionalidades do Prime, mas conectadas ao sistema que já usam hoje. A única diferença é a taxa de integração consultada.',
+      features: sharedFeatures.map((feature) =>
+        feature === 'Suporte na ativação inicial' ? 'Suporte na integração' : feature
+      ),
     },
   ];
 
@@ -43,8 +43,9 @@ export default function Pricing() {
     ['Como faço para reservar minha vaga?', 'Preencha o formulário e nosso time entra em contato para alinhar o acesso ao beta e os próximos passos.'],
     ['Quanto tempo leva para ativar?', 'A configuração inicial pode ser feita rapidamente, com apoio do time para conectar WhatsApp, catálogo e regras da loja.'],
     ['Posso assumir uma conversa manualmente?', 'Sim. A IA pode pausar e transferir a conversa para um atendente quando houver exceção ou oportunidade especial.'],
-    ['Funciona com meu estoque atual?', 'Sim. No plano Start, o estoque fica centralizado no sistema do Masca. No plano Integração, avaliamos o seu sistema atual e informamos a taxa de integração necessária.'],
-    ['A taxa de integração já está inclusa?', 'Não. O plano Integração custa R$ 997/mês e a taxa de integração deve ser consultada conforme o sistema usado pela loja.'],
+    ['Qual é a diferença entre os planos?', 'Os dois têm as mesmas funcionalidades. No Prime, a operação roda no sistema do Masca. No Connect, conectamos o Masca ao sistema atual da loja e a taxa de integração deve ser consultada.'],
+    ['A taxa de integração já está inclusa?', 'Não. O plano Connect custa R$ 997/mês, assim como o Prime, mas a taxa de integração é consultada conforme o sistema usado pela loja.'],
+    ['Essa condição é por tempo limitado?', 'Sim. A condição beta depende da disponibilidade de vagas para implantação acompanhada e pode mudar conforme a abertura de novas turmas.'],
   ];
 
   function handleClick(planName = 'pricing') {
@@ -60,7 +61,7 @@ export default function Pricing() {
           <p className="section-label centered">PLANOS</p>
           <h2 className="section-title centered">Escolha como o Masca entra na sua operação</h2>
           <p className="section-subtitle centered">
-            Escolha operar tudo no sistema do Masca ou conectar nossa IA à estrutura que sua loja já usa.
+            Garanta o valor beta antes da próxima turma de implantação.
           </p>
         </div>
 
@@ -70,6 +71,12 @@ export default function Pricing() {
               <span className="plan-tag">{plan.tag}</span>
               <h3>{plan.name}</h3>
               <p>{plan.description}</p>
+              <div className="plan-promo">{plan.promo}</div>
+              <div className="plan-old-price">
+                <span>De</span>
+                <s>R$ {plan.oldPrice}</s>
+                <span>por</span>
+              </div>
               <div className="plan-price">
                 <small>R$</small>
                 <strong>{plan.price}</strong>
