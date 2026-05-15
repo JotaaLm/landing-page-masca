@@ -6,6 +6,7 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [whatsapp, setWhatsapp] = useState('');
   const [utmParams] = useState(() => {
     if (typeof window === 'undefined') return {};
     const params = new URLSearchParams(window.location.search);
@@ -16,6 +17,21 @@ export default function ContactForm() {
     });
     return utm;
   });
+
+  function formatWhatsapp(value) {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    const area = digits.slice(0, 2);
+    const firstPart = digits.slice(2, 7);
+    const secondPart = digits.slice(7, 11);
+
+    if (digits.length <= 2) return area ? `(${area}` : '';
+    if (digits.length <= 7) return `(${area}) ${firstPart}`;
+    return `(${area}) ${firstPart}-${secondPart}`;
+  }
+
+  function handleWhatsappChange(e) {
+    setWhatsapp(formatWhatsapp(e.target.value));
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +50,11 @@ export default function ContactForm() {
       setSubmitted(true);
       return;
     }
+    if (result.error === 'supabase_not_configured') {
+      setError('Formulario indisponivel no momento. Verifique a configuracao do Supabase.');
+      return;
+    }
+
     setError(result.error?.includes('duplicate') ? 'Este e-mail já foi cadastrado.' : 'Erro ao enviar. Tente novamente.');
   }
 
@@ -71,7 +92,16 @@ export default function ContactForm() {
             </label>
             <label>
               WhatsApp
-              <input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required />
+              <input
+                type="tel"
+                name="whatsapp"
+                placeholder="(81) 99538-0600"
+                value={whatsapp}
+                onChange={handleWhatsappChange}
+                inputMode="numeric"
+                maxLength="15"
+                required
+              />
             </label>
 
             {Object.entries(utmParams).map(([key, val]) => (

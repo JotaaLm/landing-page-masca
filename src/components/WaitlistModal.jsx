@@ -46,6 +46,11 @@ export default function WaitlistModal({ isOpen, onClose }) {
       setSubmitted(true);
       return;
     }
+    if (result.error === 'supabase_not_configured') {
+      setError('Formulario indisponivel no momento. Verifique a configuracao do Supabase.');
+      return;
+    }
+
     setError(result.error?.includes('duplicate')
       ? 'Este e-mail já está na lista de espera!'
       : 'Erro ao salvar. Tente novamente.');

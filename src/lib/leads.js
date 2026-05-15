@@ -7,8 +7,11 @@ import { supabase } from './supabase';
  */
 export async function submitWaitlistLead(data) {
   if (!supabase) {
-    console.log('[Mascate][Fallback] Waitlist lead (sem Supabase):', data);
-    return { success: true };
+    console.error('[Mascate] Supabase nao configurado. Waitlist lead nao foi salvo:', data);
+    return {
+      success: false,
+      error: 'supabase_not_configured',
+    };
   }
 
   const { error } = await supabase.from('waitlist_leads').insert([
@@ -34,8 +37,11 @@ export async function submitWaitlistLead(data) {
  */
 export async function submitFullLead(data) {
   if (!supabase) {
-    console.log('[Mascate][Fallback] Full lead (sem Supabase):', data);
-    return { success: true };
+    console.error('[Mascate] Supabase nao configurado. Full lead nao foi salvo:', data);
+    return {
+      success: false,
+      error: 'supabase_not_configured',
+    };
   }
 
   const { error } = await supabase.from('leads').insert([

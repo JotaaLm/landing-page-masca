@@ -34,6 +34,62 @@
  * @param {string} eventName - Nome do evento (ver tabela acima)
  * @param {Record<string, any>} [data] - Dados extras do evento
  */
+const pendingUmamiEvents = [];
+let flushTimer = null;
+let flushAttempts = 0;
+
+function canUseUmami() {
+  return typeof window !== 'undefined' && typeof window.umami?.track === 'function';
+}
+
+function sendToUmami(eventName, data) {
+  if (eventName) {
+    window.umami.track(eventName, data);
+    return;
+  }
+
+  window.umami.track();
+}
+
+function flushUmamiEvents() {
+  if (!canUseUmami()) return false;
+
+  while (pendingUmamiEvents.length > 0) {
+    const { eventName, data } = pendingUmamiEvents.shift();
+    sendToUmami(eventName, data);
+  }
+
+  flushAttempts = 0;
+  return true;
+}
+
+function scheduleUmamiFlush() {
+  if (typeof window === 'undefined' || flushTimer) return;
+
+  flushTimer = window.setTimeout(() => {
+    flushTimer = null;
+
+    if (flushUmamiEvents()) return;
+
+    flushAttempts += 1;
+    if (flushAttempts < 20) {
+      scheduleUmamiFlush();
+    }
+  }, 250);
+}
+
+function trackUmami(eventName, data) {
+  if (canUseUmami()) {
+    sendToUmami(eventName, data);
+    flushUmamiEvents();
+    return true;
+  }
+
+  pendingUmamiEvents.push({ eventName, data });
+  scheduleUmamiFlush();
+  return false;
+}
+
 export function trackEvent(eventName, data = {}) {
   // Debug em desenvolvimento
   if (import.meta.env.DEV) {
@@ -41,8 +97,7 @@ export function trackEvent(eventName, data = {}) {
   }
 
   // Umami: usa a API global `umami.track()`
-  if (typeof window.umami !== 'undefined') {
-    window.umami.track(eventName, data);
+  if (trackUmami(eventName, data)) {
     return;
   }
 
@@ -68,9 +123,7 @@ export function trackEvent(eventName, data = {}) {
  */
 export function trackPageView() {
   // Registra o page view nativo do Umami (aparece no dashboard principal)
-  if (typeof window.umami !== 'undefined') {
-    window.umami.track();
-  }
+  trackUmami();
 
   const params = new URLSearchParams(window.location.search);
 
