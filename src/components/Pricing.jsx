@@ -1,51 +1,43 @@
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
-export default function Pricing() {
-  const sharedFeatures = [
-    'Atendimento IA no WhatsApp para dúvidas, recomendações e pedidos',
-    'Cadastro de produtos, categorias, preços e disponibilidade',
-    'Gestão de estoque e pedidos em tempo real',
-    'Carrinho, checkout, pagamentos e formas de entrega',
-    'Cupons, promoções, combos e aumento de ticket médio',
-    'Relatórios de vendas, clientes e produtos',
-    'Painel operacional com histórico de conversas',
-    'Transferência para atendimento humano quando necessário',
-    'Suporte na ativação inicial',
-  ];
+const planFeatures = [
+  'Agente inteligente no WhatsApp',
+  'Produtos e preços organizados para o atendimento',
+  'Pedidos mais claros para o time finalizar',
+  'Recomendações de produtos e combos',
+  'Passagem para atendimento humano quando precisar',
+  'Acompanhamento das oportunidades de venda',
+];
 
+export default function Pricing() {
   const plans = [
     {
       name: 'Prime',
-      tag: 'NO SISTEMA DO MASCA',
-      oldPrice: '1.297',
-      price: '997',
+      tag: 'COM O MASCA',
+      oldPrice: '2.997',
+      price: '2.300',
       priceSuffix: '/mês',
-      promo: 'Preço beta limitado',
-      description: 'Para lojas que querem vender com atendimento IA e operar catálogo, pedidos, estoque, pagamentos e entregas dentro do sistema do Masca.',
-      features: sharedFeatures,
+      description: 'Para lojas que querem começar rápido com o agente do Masca atendendo, recomendando produtos e ajudando a vender pelo WhatsApp.',
+      features: planFeatures,
       featured: true,
     },
     {
       name: 'Connect',
-      tag: 'NO SEU SISTEMA ATUAL',
-      oldPrice: '1.497',
-      price: '997',
-      priceSuffix: '/mês + taxa de integração',
-      promo: 'Preço beta limitado',
-      description: 'Para lojas que querem as mesmas funcionalidades do Prime, mas conectadas ao sistema que já usam hoje. A única diferença é a taxa de integração consultada.',
-      features: sharedFeatures.map((feature) =>
-        feature === 'Suporte na ativação inicial' ? 'Suporte na integração' : feature
-      ),
+      tag: 'NO JEITO DA SUA LOJA',
+      oldPrice: '2.997',
+      price: '2.300',
+      priceSuffix: '/mês + conexão personalizada',
+      description: 'Para lojas que já têm uma operação montada e querem conectar o agente do Masca ao jeito que a equipe trabalha hoje.',
+      features: planFeatures,
     },
   ];
 
   const faqs = [
-    ['Como faço para reservar minha vaga?', 'Preencha o formulário e nosso time entra em contato para alinhar o acesso ao beta e os próximos passos.'],
-    ['Quanto tempo leva para ativar?', 'A configuração inicial pode ser feita rapidamente, com apoio do time para conectar WhatsApp, catálogo e regras da loja.'],
-    ['Posso assumir uma conversa manualmente?', 'Sim. A IA pode pausar e transferir a conversa para um atendente quando houver exceção ou oportunidade especial.'],
-    ['Qual é a diferença entre os planos?', 'Os dois têm as mesmas funcionalidades. No Prime, a operação roda no sistema do Masca. No Connect, conectamos o Masca ao sistema atual da loja e a taxa de integração deve ser consultada.'],
-    ['A taxa de integração já está inclusa?', 'Não. O plano Connect custa R$ 997/mês, assim como o Prime, mas a taxa de integração é consultada conforme o sistema usado pela loja.'],
-    ['Essa condição é por tempo limitado?', 'Sim. A condição beta depende da disponibilidade de vagas para implantação acompanhada e pode mudar conforme a abertura de novas turmas.'],
+    ['Esse valor é definitivo?', 'Não. É uma condição especial de lançamento para os primeiros clientes. A próxima turma pode ter outro valor.'],
+    ['Qual é a diferença entre Prime e Connect?', 'No Prime, você começa mais rápido com o Masca como base da operação. No Connect, o agente entra no fluxo que sua loja já usa hoje, com uma conexão personalizada para deixar tudo mais integrado.'],
+    ['Preciso contratar agora?', 'Não. Ao preencher o formulário, você reserva uma conversa com o Masca para entender se faz sentido para sua loja.'],
+    ['Posso assumir uma conversa manualmente?', 'Sim. O agente pode passar a conversa para um atendente quando houver exceção, negociação ou oportunidade especial.'],
+    ['O agente substitui minha equipe?', 'Não é essa a proposta. Ele trabalha junto com o time para responder mais rápido, filtrar oportunidades e vender fora do horário comercial.'],
   ];
 
   function handleClick(planName = 'pricing') {
@@ -58,10 +50,10 @@ export default function Pricing() {
     <section className="pricing-section" id="precos">
       <div className="container">
         <div className="plans-heading reveal">
-          <p className="section-label centered">PLANOS</p>
-          <h2 className="section-title centered">Escolha como o Masca entra na sua operação</h2>
+          <p className="section-label centered">PLANOS COM VALOR DE LANÇAMENTO</p>
+          <h2 className="section-title centered">Garanta a condição especial antes da próxima turma</h2>
           <p className="section-subtitle centered">
-            Garanta o valor beta antes da próxima turma de implantação.
+            Preço exclusivo por tempo limitado para as primeiras lojas que querem colocar um agente de vendas no WhatsApp.
           </p>
         </div>
 
@@ -71,7 +63,7 @@ export default function Pricing() {
               <span className="plan-tag">{plan.tag}</span>
               <h3>{plan.name}</h3>
               <p>{plan.description}</p>
-              <div className="plan-promo">{plan.promo}</div>
+              <span className="plan-promo">Preço de lançamento</span>
               <div className="plan-old-price">
                 <span>De</span>
                 <s>R$ {plan.oldPrice}</s>
@@ -88,7 +80,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <button className="plan-cta" onClick={() => handleClick(plan.name)}>
-                Reservar vaga no beta
+                Garantir valor de lançamento
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

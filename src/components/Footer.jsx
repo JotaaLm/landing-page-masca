@@ -11,10 +11,10 @@ export default function Footer() {
             <LogoMark small />
             <strong>Masca</strong>
           </div>
-          <p>Vendedor IA, WhatsApp, estoque e delivery para lojas que querem vender com menos fricção.</p>
+          <p>Agente inteligente para WhatsApp, atendimento e vendas em lojas que querem responder mais rápido e perder menos oportunidades.</p>
         </div>
         <nav>
-          <a href="#solucoes">Soluções</a>
+          <a href="#diagnostico">Problema</a>
           <a href="#resultados">Resultados</a>
           <a href="#precos">Planos</a>
           <a href="#contato">Contato</a>

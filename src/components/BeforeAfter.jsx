@@ -3,19 +3,19 @@ import MascotRobot from './MascotRobot';
 
 export default function BeforeAfter() {
   const oldWay = [
-    'Resposta lenta no WhatsApp',
-    'Estoque em planilhas soltas',
+    'Resposta lenta quando o cliente quer comprar',
+    'Informações espalhadas em conversas e planilhas',
     'Cliente repetindo informações',
-    'Sem oferta complementar',
-    'Time apagando incêndio',
+    'Sem recomendação de produto no momento certo',
+    'Dono e equipe sempre correndo atrás',
   ];
 
   const newWay = [
-    'Atendimento em segundos',
-    'Estoque sempre sincronizado',
-    'Pedido estruturado automaticamente',
-    'Upsell no momento certo',
-    'Equipe focada nos melhores pedidos',
+    'Atendimento rápido no WhatsApp',
+    'Dúvidas respondidas sem fila',
+    'Pedido mais claro para finalizar',
+    'Recomendações para aumentar o carrinho',
+    'Equipe focada nas melhores oportunidades',
   ];
 
   function handleClick() {
@@ -27,17 +27,17 @@ export default function BeforeAfter() {
   return (
     <section className="before-after-section" id="antes-depois">
       <div className="container">
-        <p className="section-label centered reveal">SEU NOVO HUB DE VENDAS COM IA</p>
+        <p className="section-label centered reveal">SEU NOVO JEITO DE VENDER NO WHATSAPP</p>
         <h2 className="section-title centered reveal reveal-delay-1">
           Diga adeus ao jeito antigo de vender pelo WhatsApp
         </h2>
         <p className="section-subtitle centered reveal reveal-delay-2">
-          O Masca transforma conversas soltas em uma operação conectada, rápida e mensurável.
+          O Masca transforma conversas soltas em atendimento rápido, recomendações melhores e pedidos mais organizados.
         </p>
 
         <div className="compare-panels">
           <article className="compare-panel old reveal reveal-delay-1">
-            <p>SEM A MASCA</p>
+            <p>SEM O MASCA</p>
             <h3>O jeito antigo</h3>
             <ul>
               {oldWay.map((item) => <li key={item}>{item}</li>)}
@@ -46,7 +46,7 @@ export default function BeforeAfter() {
 
           <article className="compare-panel new reveal reveal-delay-2">
             <MascotRobot className="compare-mascot" />
-            <p>COM A MASCA</p>
+            <p>COM O MASCA</p>
             <h3>O jeito novo</h3>
             <ul>
               {newWay.map((item) => <li key={item}>{item}</li>)}
@@ -56,7 +56,7 @@ export default function BeforeAfter() {
 
         <div className="center-cta reveal reveal-delay-3">
           <button className="hero-cta" onClick={handleClick}>
-            Reservar vaga no beta
+            Quero vender mais pelo WhatsApp
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

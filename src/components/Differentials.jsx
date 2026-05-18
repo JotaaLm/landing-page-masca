@@ -11,7 +11,7 @@ export default function Differentials() {
     {
       tag: 'PEDIDOS AUTOMÁTICOS',
       title: 'Pedido completo direto no WhatsApp',
-      text: 'A IA confirma itens, quantidades, endereço, observações e entrega um pedido pronto para produção.',
+      text: 'O agente confirma itens, quantidades, endereço e observações para entregar um pedido mais claro ao seu time.',
       metric: '0',
       metricLabel: 'informações perdidas no caminho',
       visual: 'order',
@@ -45,7 +45,7 @@ export default function Differentials() {
           </div>
           <div className="chat-flow">
             <span className="chat-pill client">Cliente pediu desconto</span>
-            <span className="chat-pill ai">IA reuniu contexto</span>
+            <span className="chat-pill ai">Agente reuniu contexto</span>
             <span className="chat-pill human">Time assumiu</span>
           </div>
           <div className="live-handoff">
@@ -117,8 +117,8 @@ export default function Differentials() {
     <section className="diff-section" id="diferenciais">
       <div className="container">
         <div className="section-heading reveal">
-          <p className="section-label">FUNCIONALIDADES PARA CONVERSÃO</p>
-          <h2 className="section-title">Uma operação fluida com as ferramentas que sua loja já usa</h2>
+          <p className="section-label">FUNCIONALIDADES PARA VENDER MAIS</p>
+          <h2 className="section-title">O agente do Masca ajuda sua loja a atender, vender e organizar melhor</h2>
         </div>
 
         <div className="feature-showcase">

@@ -4,10 +4,10 @@ import MascotRobot from './MascotRobot';
 
 export default function Hero() {
   const phrases = useMemo(() => [
-    'atendimento automático',
-    'estoque sincronizado',
-    'pedidos organizados',
-    'upsell inteligente',
+    'mesmo dormindo?',
+    'fora do expediente?',
+    'com o time ocupado?',
+    'sem perder clientes?',
   ], []);
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [typedText, setTypedText] = useState(phrases[0]);
@@ -87,11 +87,11 @@ export default function Hero() {
         <button
           className="automation-demo reveal reveal-delay-2"
           onClick={nextAutomation}
-          aria-label="Ver próxima etapa de automação"
+          aria-label="Ver próxima etapa do agente"
         >
           <div className="automation-header">
             <span className="automation-pulse" />
-            <strong>Automação ao vivo</strong>
+            <strong>Agente em ação</strong>
             <small>{automations[activeAutomation].stat}</small>
           </div>
           <div className="automation-chat">
@@ -112,20 +112,19 @@ export default function Hero() {
         </button>
 
         <div className="hero-copy">
-          <p className="hero-tag reveal reveal-delay-1">VENDEDOR IA PARA WHATSAPP, ESTOQUE E DELIVERY</p>
+          <p className="hero-tag reveal reveal-delay-1">AGENTE INTELIGENTE PARA VENDER PELO WHATSAPP</p>
           <h1 className="reveal reveal-delay-2">
-            <span className="headline-neutral">Gere mais vendas</span>
-            <span className="headline-neutral">com</span>
-            <span className="typed-line">
+            <span className="headline-neutral">Já pensou vender 24 horas por dia,</span>
+            <span className="headline-typed-line">
               <span className="typed-text">{typedText}</span>
             </span>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
-            O Masca atende clientes em segundos, recomenda produtos, monta pedidos e sincroniza o estoque
-            para sua loja vender mesmo quando o time está ocupado.
+            O Masca coloca um agente de vendas no WhatsApp da sua loja para atender clientes,
+            tirar dúvidas, recomendar produtos e ajudar a fechar pedidos mesmo quando você não está disponível.
           </p>
           <button className="hero-cta reveal reveal-delay-4" onClick={handleCtaClick}>
-            Reservar vaga no beta
+            Quero vender mais pelo WhatsApp
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

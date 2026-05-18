@@ -4,17 +4,17 @@ export default function Anatomy() {
   const solutions = [
     {
       eyebrow: 'PARA SEU WHATSAPP',
-      title: 'Vendedor IA que atende e fecha pedidos',
-      text: 'Responde em segundos, entende o pedido, sugere complementos e chama um humano quando precisa.',
-      cta: 'Reservar vaga no beta',
+      title: 'Agente de vendas que atende e conduz o pedido',
+      text: 'Responde em segundos, entende o que o cliente procura, sugere produtos e chama um humano quando precisa.',
+      cta: 'Quero testar o agente do Masca',
       visual: 'whatsapp',
       featured: true,
     },
     {
       eyebrow: 'PARA SUA OPERAÇÃO',
-      title: 'Estoque sincronizado em tempo real',
-      text: 'Cada venda atualiza o painel automaticamente para evitar ruptura, pedido furado e retrabalho.',
-      cta: 'Conhecer solução',
+      title: 'Pedidos mais claros para sua equipe',
+      text: 'O agente ajuda a organizar itens, quantidades, endereço e observações para reduzir erro e retrabalho.',
+      cta: 'Ver como funciona',
       visual: 'stock',
     },
     {
@@ -27,12 +27,12 @@ export default function Anatomy() {
   ];
 
   const featureSteps = [
-    ['Capture e responda', 'Abordagem instantânea para não deixar o cliente esperando.', 'chat'],
-    ['Recomende melhor', 'Sugestões de combos e produtos complementares durante a conversa.', 'spark'],
-    ['Controle estoque', 'Venda apenas o que existe e evite cancelamentos por ruptura.', 'box'],
-    ['Distribua pedidos', 'Organize status, prioridade e repasse para o time certo.', 'route'],
-    ['Analise os resultados', 'Entenda atendimentos, produtos mais pedidos e gargalos.', 'chart'],
-    ['Assuma quando quiser', 'Humano entra na conversa sem perder contexto.', 'user'],
+    ['Atenda na hora', 'O cliente recebe resposta rápida e não fica esperando no WhatsApp.', 'chat'],
+    ['Tire dúvidas', 'O agente explica produtos, disponibilidade, entrega e próximos passos.', 'spark'],
+    ['Recomende produtos', 'Sugestões de combos e itens complementares durante a conversa.', 'box'],
+    ['Organize pedidos', 'Itens, quantidades e informações importantes chegam mais claros para o time.', 'route'],
+    ['Acompanhe oportunidades', 'Entenda conversas, produtos mais pedidos e pontos de perda.', 'chart'],
+    ['Assuma quando quiser', 'A equipe humana entra na conversa sem perder o contexto.', 'user'],
   ];
 
   const featureIcons = {
@@ -155,8 +155,8 @@ export default function Anatomy() {
         </div>
 
         <div className="section-heading">
-          <p className="section-label">CONHEÇA A MASCA</p>
-          <h2 className="section-title">Otimização completa da conversa até a entrega</h2>
+          <p className="section-label">O QUE O MASCA FAZ</p>
+          <h2 className="section-title">Do primeiro "oi" até o pedido pronto para vender mais</h2>
         </div>
 
         <div className="feature-lattice">

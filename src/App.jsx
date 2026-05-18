@@ -12,6 +12,7 @@ import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
 import ComparisonTable from './components/ComparisonTable';
+import HumanComparison from './components/HumanComparison';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -33,8 +34,9 @@ export default function App() {
         <Differentials />
         <SocialProof />
         <ComparisonTable />
-        <Pricing />
+        <HumanComparison />
         <ContactForm />
+        <Pricing />
       </main>
       <Footer />
     </>

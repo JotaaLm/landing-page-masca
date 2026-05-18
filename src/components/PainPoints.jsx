@@ -1,8 +1,8 @@
 export default function PainPoints() {
   const facts = [
-    'Mensagens chegam quando ninguém está olhando',
-    'Clientes desistem antes do primeiro atendimento',
-    'Estoque manual cria pedidos impossíveis de entregar',
+    'Mensagens chegam quando você está ocupado',
+    'Clientes compram de outra loja quando a resposta demora',
+    'Pedidos se perdem quando tudo depende de controle manual',
   ];
 
   return (
@@ -10,7 +10,7 @@ export default function PainPoints() {
       <div className="container pain-wrap">
         <div className="stat-hero reveal">
           <h2><span>7 em cada 10</span> pedidos iniciados no WhatsApp não viram vendas</h2>
-          <p>Quando resposta, estoque e fechamento dependem de trabalho manual, a operação perde dinheiro exatamente no momento em que o cliente queria comprar.</p>
+          <p>Quando resposta, dúvida e pedido dependem só de atendimento manual, sua loja perde dinheiro justamente no momento em que o cliente queria comprar.</p>
         </div>
 
         <div className="fact-pills reveal reveal-delay-2">
@@ -25,9 +25,9 @@ export default function PainPoints() {
           ))}
         </div>
 
-        <p className="section-label reveal reveal-delay-3">AGENTES DE IA FOCADOS EM VENDA</p>
+        <p className="section-label reveal reveal-delay-3">AGENTE INTELIGENTE FOCADO EM VENDA</p>
         <h2 className="section-title centered reveal reveal-delay-4">
-          Aumente a performance da sua loja operando 24/7
+          Venda pelo WhatsApp mesmo quando ninguém do time está online
         </h2>
       </div>
     </section>

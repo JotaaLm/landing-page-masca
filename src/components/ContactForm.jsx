@@ -21,16 +21,28 @@ export default function ContactForm() {
   function formatWhatsapp(value) {
     const digits = value.replace(/\D/g, '').slice(0, 11);
     const area = digits.slice(0, 2);
-    const firstPart = digits.slice(2, 7);
-    const secondPart = digits.slice(7, 11);
+    const firstPart = digits.length > 10 ? digits.slice(2, 7) : digits.slice(2, 6);
+    const secondPart = digits.length > 10 ? digits.slice(7, 11) : digits.slice(6, 10);
 
     if (digits.length <= 2) return area ? `(${area}` : '';
-    if (digits.length <= 7) return `(${area}) ${firstPart}`;
+    if (digits.length <= 6) return `(${area}) ${digits.slice(2)}`;
     return `(${area}) ${firstPart}-${secondPart}`;
   }
 
   function handleWhatsappChange(e) {
     setWhatsapp(formatWhatsapp(e.target.value));
+  }
+
+  function getSubmitErrorMessage(errorCode) {
+    const messages = {
+      duplicate_email: 'Este e-mail já está cadastrado.',
+      duplicate_store_name: 'Este nome de loja já está cadastrado.',
+      duplicate_whatsapp: 'Este WhatsApp já está cadastrado.',
+      duplicate_lead: 'Este contato já foi cadastrado.',
+      supabase_not_configured: 'Formulário indisponível no momento. Verifique a configuração do Supabase.',
+    };
+
+    return messages[errorCode] || 'Erro ao enviar. Tente novamente.';
   }
 
   async function handleSubmit(e) {
@@ -50,35 +62,30 @@ export default function ContactForm() {
       setSubmitted(true);
       return;
     }
-    if (result.error === 'supabase_not_configured') {
-      setError('Formulario indisponivel no momento. Verifique a configuracao do Supabase.');
-      return;
-    }
 
-    setError(result.error?.includes('duplicate') ? 'Este e-mail já foi cadastrado.' : 'Erro ao enviar. Tente novamente.');
+    setError(getSubmitErrorMessage(result.error));
   }
 
   return (
     <section className="contact-section" id="contato">
       <div className="container contact-card reveal">
         <div className="contact-info">
-          <p className="section-label">PRONTO PARA O PRÓXIMO NÍVEL</p>
-          <h2>Ative sua loja inteligente no WhatsApp</h2>
+          <p className="section-label">RESERVE SUA VAGA</p>
+          <h2>Quer ver o agente do Masca vendendo pela sua loja?</h2>
           <p>
-            Deixe seus dados e receba o caminho de ativação. Nosso time ajuda a mapear catálogo,
-            estoque, regras de entrega e pontos onde a IA pode gerar mais vendas.
+            Deixe seus dados e conte o principal desafio do seu atendimento. O time do Masca entra em contato para entender sua loja e apresentar a condição de lançamento.
           </p>
           <div className="contact-trust">
-            <span>Vagas limitadas no beta</span>
-            <span>Ativação acompanhada</span>
-            <span>Suporte na ativação</span>
+            <span>Valor exclusivo de lançamento</span>
+            <span>Vagas limitadas para a primeira turma</span>
+            <span>Sem compromisso</span>
           </div>
         </div>
 
         {submitted ? (
           <div className="form-success">
             <h3>Cadastro recebido.</h3>
-            <p>A equipe Masca vai entrar em contato para combinar os próximos passos.</p>
+            <p>O time do Masca vai entrar em contato para combinar os próximos passos.</p>
           </div>
         ) : (
           <form className="contact-form" onSubmit={handleSubmit}>
@@ -88,14 +95,14 @@ export default function ContactForm() {
             </label>
             <label>
               E-mail
-              <input type="email" name="email" placeholder="email@empresa.com" required />
+              <input type="email" name="email" placeholder="seu@email.com" autoComplete="email" required />
             </label>
             <label>
               WhatsApp
               <input
                 type="tel"
                 name="whatsapp"
-                placeholder="(00) 00000-0000"
+                placeholder="(11) 99999-9999"
                 value={whatsapp}
                 onChange={handleWhatsappChange}
                 inputMode="numeric"
@@ -103,13 +110,29 @@ export default function ContactForm() {
                 required
               />
             </label>
+            <label>
+              Nome da loja
+              <input type="text" name="store_name" placeholder="Ex: Loja da Ana" required />
+            </label>
+            <label>
+              Segmento da loja
+              <input type="text" name="store_segment" placeholder="Ex: moda, cosméticos, suplementos" required />
+            </label>
+            <label>
+              Quanto você paga hoje ou pagaria por uma solução assim?
+              <input type="text" name="budget" placeholder="Ex: R$ 2.000 por mês" required />
+            </label>
+            <label>
+              Principal dificuldade
+              <textarea name="message" placeholder="Ex: perco vendas quando demoro para responder no WhatsApp" rows="4" required />
+            </label>
 
             {Object.entries(utmParams).map(([key, val]) => (
               <input key={key} type="hidden" name={key} value={val} />
             ))}
 
             <button type="submit" className="form-submit" disabled={loading}>
-              {loading ? 'Enviando...' : 'Quero reservar vaga'}
+              {loading ? 'Enviando...' : 'Reserve sua vaga com valor exclusivo de lançamento'}
             </button>
             {error && <p className="form-error">{error}</p>}
           </form>
