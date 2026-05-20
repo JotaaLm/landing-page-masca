@@ -94,7 +94,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
 
             <p className="modal-desc">
               Tenha acesso antecipado ao Masca para testar o agente de vendas
-              integrado ao estoque no seu próprio WhatsApp. Sem compromisso, sem cartão.
+              integrado ao estoque no seu próprio WhatsApp. Sem cartão.
             </p>
 
             <form onSubmit={handleSubmit} className="modal-form" id="waitlist-form">

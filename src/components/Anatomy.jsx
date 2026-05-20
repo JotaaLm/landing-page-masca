@@ -26,54 +26,18 @@ export default function Anatomy() {
     },
   ];
 
-  const featureSteps = [
-    ['Atenda na hora', 'O cliente recebe resposta rápida e não fica esperando no WhatsApp.', 'chat'],
-    ['Tire dúvidas', 'O agente explica produtos, disponibilidade, entrega e próximos passos.', 'spark'],
-    ['Recomende produtos', 'Sugestões de combos e itens complementares durante a conversa.', 'box'],
-    ['Organize pedidos', 'Itens, quantidades e informações importantes chegam mais claros para o time.', 'route'],
-    ['Acompanhe oportunidades', 'Entenda conversas, produtos mais pedidos e pontos de perda.', 'chart'],
-    ['Assuma quando quiser', 'A equipe humana entra na conversa sem perder o contexto.', 'user'],
+  const dashboardFeatures = [
+    ['Catálogo e estoque', 'Cadastre produtos, preços, variações e disponibilidade em um painel central.'],
+    ['Pedidos do WhatsApp', 'Veja pedidos montados pelo agente, dados do cliente, status e próximos passos.'],
+    ['Gestão da loja', 'Acompanhe vendas, conversas, produtos mais buscados e pontos que precisam de atenção.'],
+    ['Gestão do agente', 'Ajuste o tom de voz, acompanhe respostas e veja se ele está entendendo os clientes corretamente.'],
   ];
 
-  const featureIcons = {
-    chat: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.3 9.5 9.5 0 0 1-3.9-.8L3 20l1.1-4.2A8.1 8.1 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z" />
-        <path d="M8 11h8M8 14h5" />
-      </svg>
-    ),
-    spark: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z" />
-        <path d="m18 15 .8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15Z" />
-      </svg>
-    ),
-    box: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" />
-        <path d="M4.5 8 12 12.2 19.5 8M12 21v-8.8" />
-      </svg>
-    ),
-    route: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM19 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
-        <path d="M7 16h4.5a3.5 3.5 0 0 0 0-7H17" />
-      </svg>
-    ),
-    chart: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 19V5" />
-        <path d="M8 17v-5M13 17V8M18 17v-8" />
-        <path d="M4 19h17" />
-      </svg>
-    ),
-    user: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-        <path d="M4 20a8 8 0 0 1 16 0" />
-      </svg>
-    ),
-  };
+  const dashboardStats = [
+    ['Pedidos hoje', '42', '+18%'],
+    ['Estoque sincronizado', '96%', 'online'],
+    ['Conversas em andamento', '18', 'tempo real'],
+  ];
 
   function renderSolutionVisual(type) {
     if (type === 'stock') {
@@ -154,22 +118,99 @@ export default function Anatomy() {
           ))}
         </div>
 
-        <div className="section-heading">
-          <p className="section-label">O QUE O MASCA FAZ</p>
-          <h2 className="section-title">Do primeiro "oi" até o pedido pronto para vender mais</h2>
+        <div className="section-heading" id="painel">
+          <p className="section-label">PAINEL DE GERENCIAMENTO</p>
+          <h2 className="section-title">Sua loja organizada em um painel simples, completo e integrado</h2>
         </div>
 
-        <div className="feature-lattice">
-          {featureSteps.map(([title, text, icon], index) => (
-            <article className="lattice-item" key={title}>
-              <div className="lattice-top">
-                <span className="lattice-number">{String(index + 1).padStart(2, '0')}</span>
-                <span className="lattice-icon">{featureIcons[icon]}</span>
+        <div className="store-dashboard-block reveal">
+          <div className="dashboard-copy">
+            <div className="dashboard-copy-head">
+              <p>
+                <strong>Tudo que acontece no atendimento vira gestão.</strong>
+                O agente registra pedidos, organiza informações importantes e deixa sua equipe com contexto
+                para acompanhar a loja em tempo real.
+              </p>
+            </div>
+            <div className="dashboard-feature-list">
+              {dashboardFeatures.map(([title, text]) => (
+                <article key={title}>
+                  <span />
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="store-dashboard-preview" aria-label="Prévia visual do painel de gerenciamento da loja">
+            <div className="dashboard-window">
+              <div className="dashboard-window-top">
+                <div>
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <strong>masca.ai/admin</strong>
               </div>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+              <div className="dashboard-shell">
+                <aside>
+                  <strong>Masca</strong>
+                  <span className="active">Visão geral</span>
+                  <span>Produtos</span>
+                  <span>Pedidos</span>
+                  <span>Conversas</span>
+                  <span>Clientes</span>
+                </aside>
+                <div className="dashboard-main">
+                  <div className="dashboard-main-head">
+                    <div>
+                      <small>Loja conectada</small>
+                      <h3>Painel da loja</h3>
+                    </div>
+                    <span>Estoque em tempo real</span>
+                  </div>
+                  <div className="dashboard-stat-grid">
+                    {dashboardStats.map(([label, value, meta]) => (
+                      <div className="dashboard-stat-card" key={label}>
+                        <small>{label}</small>
+                        <strong>{value}</strong>
+                        <span>{meta}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="dashboard-content-grid">
+                    <div className="dashboard-orders">
+                      <div>
+                        <strong>Pedidos recentes</strong>
+                        <span>Atualizado agora</span>
+                      </div>
+                      <p><span>#1842</span> Whey + creatina <strong>Separar</strong></p>
+                      <p><span>#1841</span> Kit skincare <strong>Pago</strong></p>
+                      <p><span>#1840</span> Vestido midi <strong>Entrega</strong></p>
+                    </div>
+                    <div className="dashboard-stock">
+                      <strong>Produtos mais pedidos</strong>
+                      <span style={{ '--width': '86%' }}>Whey baunilha</span>
+                      <span style={{ '--width': '64%' }}>Creatina 300g</span>
+                      <span style={{ '--width': '52%' }}>Coqueteleira</span>
+                    </div>
+                    <div className="dashboard-conversations">
+                      <div>
+                        <strong>Conversas</strong>
+                        <span>WhatsApp conectado</span>
+                      </div>
+                      <p><span>MC</span> Maria Clara <strong>Novo pedido</strong></p>
+                      <p><span>RL</span> Rafael Lima <strong>Dúvida</strong></p>
+                      <p><span>AN</span> Ana Paula <strong>Humano</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

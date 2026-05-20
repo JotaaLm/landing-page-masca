@@ -11,7 +11,6 @@ import Differentials from './components/Differentials';
 import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
-import ComparisonTable from './components/ComparisonTable';
 import HumanComparison from './components/HumanComparison';
 import Footer from './components/Footer';
 
@@ -28,14 +27,13 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <HumanComparison />
         <PainPoints />
         <Anatomy />
         <BeforeAfter />
+        <ContactForm />
         <Differentials />
         <SocialProof />
-        <ComparisonTable />
-        <HumanComparison />
-        <ContactForm />
         <Pricing />
       </main>
       <Footer />

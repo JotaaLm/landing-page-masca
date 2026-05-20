@@ -40,20 +40,22 @@ export default function Navbar() {
 
   const links = [
     ['Início', 'hero'],
+    ['Comparativo', 'comparativo-clt'],
     ['Problema', 'diagnostico'],
     ['Como funciona', 'anatomia'],
+    ['Painel', 'painel'],
     ['Antes/depois', 'antes-depois'],
+    ['Contato', 'contato'],
     ['Funcionalidades', 'diferenciais'],
     ['Resultados', 'resultados'],
-    ['Recursos', 'recursos'],
-    ['Comparativo', 'comparativo-clt'],
-    ['Contato', 'contato'],
     ['Planos', 'precos'],
   ];
 
   const quickLinks = [
+    ['Comparativo', 'comparativo-clt'],
     ['Problema', 'diagnostico'],
     ['Como funciona', 'anatomia'],
+    ['Painel', 'painel'],
     ['Planos', 'precos'],
   ];
 

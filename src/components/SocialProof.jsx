@@ -2,8 +2,8 @@ export default function SocialProof() {
   const stories = [
     {
       name: 'Marina Alves',
-      role: 'Operadora de delivery',
-      quote: 'A maior diferença foi parar de perder cliente por demora. O Masca responde, monta o pedido e deixa meu time só validar o que importa.',
+      handle: '@marina.delivery',
+      quote: 'Sério, eu achava normal perder cliente porque demorava pra responder. Agora o Masca já atende, monta o pedido e meu time só entra pra validar. Mudou o jogo por aqui.',
       metricA: '+41%',
       labelA: 'pedidos no WhatsApp',
       metricB: '18%',
@@ -11,8 +11,8 @@ export default function SocialProof() {
     },
     {
       name: 'Rafael Mendes',
-      role: 'Varejo local',
-      quote: 'Antes eu vendia e depois descobria que não tinha produto. Agora estoque e conversa andam juntos.',
+      handle: '@rafael.loja',
+      quote: 'O que mais me pegava era vender no WhatsApp e depois descobrir que o produto tinha acabado. Com o painel junto do atendimento, ficou bem mais tranquilo acompanhar tudo.',
       metricA: '0',
       labelA: 'pedidos furados',
       metricB: '3h',
@@ -20,8 +20,8 @@ export default function SocialProof() {
     },
     {
       name: 'Bianca Costa',
-      role: 'Cosméticos e assinatura',
-      quote: 'Os combos automáticos aumentaram o carrinho sem parecer empurrados. O cliente recebe uma sugestão útil.',
+      handle: '@biancacosmeticos',
+      quote: 'Gostei porque as recomendações não ficam com cara de venda forçada. O cliente pergunta uma coisa, o Masca entende e indica algo que realmente combina.',
       metricA: '+27%',
       labelA: 'valor por pedido',
       metricB: '24/7',
@@ -38,12 +38,14 @@ export default function SocialProof() {
         <div className="testimonial-grid">
           {stories.map((story, index) => (
             <article className={`testimonial-card reveal reveal-delay-${index + 1}`} key={story.name}>
-              <div className="testimonial-avatar" aria-hidden="true">{story.name.charAt(0)}</div>
-              <blockquote>{story.quote}</blockquote>
-              <div className="testimonial-author">
-                <strong>{story.name}</strong>
-                <span>{story.role}</span>
+              <div className="testimonial-social-head">
+                <div className="testimonial-avatar" aria-hidden="true">{story.name.charAt(0)}</div>
+                <div className="testimonial-author">
+                  <strong>{story.name}</strong>
+                  <span>{story.handle}</span>
+                </div>
               </div>
+              <blockquote>{story.quote}</blockquote>
               <div className="testimonial-metrics">
                 <div>
                   <strong>{story.metricA}</strong>

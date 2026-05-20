@@ -20,7 +20,7 @@ export default function HumanComparison() {
   return (
     <section className="human-comparison-section" id="comparativo-clt">
       <div className="container">
-        <p className="section-label centered reveal">CUSTO E VELOCIDADE</p>
+        <p className="section-label centered reveal">DIFERENCIAL</p>
         <h2 className="section-title centered reveal reveal-delay-1">
           Agente do Masca vs atendimento humano tradicional
         </h2>

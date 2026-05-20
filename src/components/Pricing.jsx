@@ -1,40 +1,48 @@
 import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
 const planFeatures = [
-  'Agente inteligente no WhatsApp',
-  'Produtos e preços organizados para o atendimento',
-  'Pedidos mais claros para o time finalizar',
+  'Agente de vendas no WhatsApp',
+  'Catálogo, preços e estoque sincronizados',
+  'Pedidos organizados',
   'Recomendações de produtos e combos',
-  'Passagem para atendimento humano quando precisar',
-  'Acompanhamento das oportunidades de venda',
+  'Acompanhamento de conversas e oportunidades',
+  'Atendimento humano quando precisar',
 ];
 
 export default function Pricing() {
   const plans = [
     {
-      name: 'Prime',
-      tag: 'COM O MASCA',
-      oldPrice: '2.997',
-      price: '2.300',
+      name: 'Masca Prime',
+      tag: 'NO SISTEMA DO MASCA',
+      oldPrice: '2.497',
+      price: '997',
       priceSuffix: '/mês',
-      description: 'Para lojas que querem começar rápido com o agente do Masca atendendo, recomendando produtos e ajudando a vender pelo WhatsApp.',
-      features: planFeatures,
+      description: 'Ideal para lojas que querem começar rápido, usando o painel Masca para gerenciar produtos, estoque, pedidos e atendimento pelo WhatsApp.',
+      detail: 'Sem taxa de integração',
+      cta: 'Usar o sistema Masca',
+      features: ['Painel Masca para gerenciar a loja', ...planFeatures],
+      highlightExtra: false,
       featured: true,
     },
     {
-      name: 'Connect',
-      tag: 'NO JEITO DA SUA LOJA',
-      oldPrice: '2.997',
-      price: '2.300',
-      priceSuffix: '/mês + conexão personalizada',
-      description: 'Para lojas que já têm uma operação montada e querem conectar o agente do Masca ao jeito que a equipe trabalha hoje.',
+      name: 'Masca Connect',
+      tag: 'NO SEU SISTEMA ATUAL',
+      oldPrice: '2.497',
+      price: '997',
+      priceSuffix: '/mês',
+      description: 'Ideal para lojas que já têm um sistema e querem conectar o Masca ao catálogo, estoque e pedidos sem mudar a operação atual.',
+      detail: '+ implantação da integração',
+      extra: 'Painel Masca incluso sem custo adicional',
+      cta: 'Conectar meu sistema',
       features: planFeatures,
+      highlightExtra: true,
     },
   ];
 
   const faqs = [
-    ['Esse valor é definitivo?', 'Não. É uma condição especial de lançamento para os primeiros clientes. A próxima turma pode ter outro valor.'],
-    ['Qual é a diferença entre Prime e Connect?', 'No Prime, você começa mais rápido com o Masca como base da operação. No Connect, o agente entra no fluxo que sua loja já usa hoje, com uma conexão personalizada para deixar tudo mais integrado.'],
+    ['Esse valor é definitivo?', 'Não. É uma condição especial de lançamento para os primeiros clientes. O valor pode mudar quando essa condição encerrar.'],
+    ['Qual é a diferença entre Prime e Connect?', 'Os dois planos têm as mesmas funcionalidades. A diferença está em como sua loja prefere operar: usando o sistema do Masca ou conectando o Masca ao sistema que você já usa.'],
+    ['O painel Masca está incluso no Connect?', 'Sim. No Connect, o painel Masca também fica incluso para acompanhamento da operação, sem custo adicional.'],
     ['Preciso contratar agora?', 'Não. Ao preencher o formulário, você reserva uma conversa com o Masca para entender se faz sentido para sua loja.'],
     ['Posso assumir uma conversa manualmente?', 'Sim. O agente pode passar a conversa para um atendente quando houver exceção, negociação ou oportunidade especial.'],
     ['O agente substitui minha equipe?', 'Não é essa a proposta. Ele trabalha junto com o time para responder mais rápido, filtrar oportunidades e vender fora do horário comercial.'],
@@ -51,9 +59,9 @@ export default function Pricing() {
       <div className="container">
         <div className="plans-heading reveal">
           <p className="section-label centered">PLANOS COM VALOR DE LANÇAMENTO</p>
-          <h2 className="section-title centered">Garanta a condição especial antes da próxima turma</h2>
+          <h2 className="section-title centered">Escolha como sua loja prefere operar com o Masca</h2>
           <p className="section-subtitle centered">
-            Preço exclusivo por tempo limitado para as primeiras lojas que querem colocar um agente de vendas no WhatsApp.
+            Os dois planos têm as mesmas funcionalidades. A diferença está em como sua loja prefere operar: usando o sistema do Masca ou conectando o Masca ao sistema que você já usa.
           </p>
         </div>
 
@@ -74,13 +82,15 @@ export default function Pricing() {
                 <strong>{plan.price}</strong>
                 <span>{plan.priceSuffix}</span>
               </div>
+              <div className="plan-detail">{plan.detail}</div>
               <ul>
+                {plan.extra && <li className={plan.highlightExtra ? 'plan-extra-item' : undefined}>{plan.extra}</li>}
                 {plan.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
               <button className="plan-cta" onClick={() => handleClick(plan.name)}>
-                Garantir valor de lançamento
+                {plan.cta}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

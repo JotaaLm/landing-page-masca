@@ -120,11 +120,11 @@ export default function Hero() {
             </span>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
-            O Masca coloca um agente de vendas no WhatsApp da sua loja para atender clientes,
-            tirar dúvidas, recomendar produtos e ajudar a fechar pedidos mesmo quando você não está disponível.
+            O Masca automatiza o WhatsApp da sua loja para atender clientes, recomendar produtos,
+            montar pedidos e manter o estoque sincronizado enquanto seu time foca no que importa.
           </p>
           <button className="hero-cta reveal reveal-delay-4" onClick={handleCtaClick}>
-            Quero vender mais pelo WhatsApp
+            Reservar Vaga
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

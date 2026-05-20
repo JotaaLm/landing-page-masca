@@ -20,13 +20,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_waitlist_email ON waitlist_leads (email);
 CREATE TABLE IF NOT EXISTS leads (
   id           bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name         text NOT NULL,
-  email        text,
+  email        text NOT NULL,
   whatsapp     text NOT NULL,
-  revenue      text,
-  store_name   text,
-  store_segment text,
-  budget       text,
-  message      text,
   utm_source   text,
   utm_medium   text,
   utm_campaign text,
@@ -35,25 +30,38 @@ CREATE TABLE IF NOT EXISTS leads (
   created_at   timestamptz DEFAULT now() NOT NULL
 );
 
-ALTER TABLE leads ALTER COLUMN email DROP NOT NULL;
-ALTER TABLE leads ADD COLUMN IF NOT EXISTS revenue text;
-ALTER TABLE leads ADD COLUMN IF NOT EXISTS store_name text;
-ALTER TABLE leads ADD COLUMN IF NOT EXISTS store_segment text;
-ALTER TABLE leads ADD COLUMN IF NOT EXISTS budget text;
-ALTER TABLE leads ADD COLUMN IF NOT EXISTS message text;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS email text;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS whatsapp text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_source text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_medium text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_campaign text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_term text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_content text;
 
--- Se voce ja tinha a versao antiga do schema, o e-mail era unico.
--- No formulario novo o contato principal e o WhatsApp, entao o e-mail fica opcional.
+-- Compatibilidade com versoes antigas do formulario:
+-- se essas colunas antigas existirem no banco, elas nao devem ser obrigatorias.
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'leads' AND column_name = 'store_name') THEN
+    ALTER TABLE leads ALTER COLUMN store_name DROP NOT NULL;
+  END IF;
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'leads' AND column_name = 'store_segment') THEN
+    ALTER TABLE leads ALTER COLUMN store_segment DROP NOT NULL;
+  END IF;
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'leads' AND column_name = 'budget') THEN
+    ALTER TABLE leads ALTER COLUMN budget DROP NOT NULL;
+  END IF;
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'leads' AND column_name = 'message') THEN
+    ALTER TABLE leads ALTER COLUMN message DROP NOT NULL;
+  END IF;
+END $$;
+
+-- Se voce ja tinha a versao antiga do schema, as colunas extras podem continuar no banco,
+-- mas o formulario novo envia apenas nome, e-mail, WhatsApp e UTMs.
 DROP INDEX IF EXISTS idx_leads_email;
 DROP INDEX IF EXISTS idx_leads_email_unique;
 DROP INDEX IF EXISTS idx_leads_store_name_unique;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_leads_email_unique ON leads (lower(email)) WHERE email IS NOT NULL;
-CREATE UNIQUE INDEX IF NOT EXISTS idx_leads_store_name_unique ON leads (lower(store_name)) WHERE store_name IS NOT NULL;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_leads_whatsapp ON leads (whatsapp);
 
 

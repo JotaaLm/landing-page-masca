@@ -36,7 +36,6 @@ export default function ContactForm() {
   function getSubmitErrorMessage(errorCode) {
     const messages = {
       duplicate_email: 'Este e-mail já está cadastrado.',
-      duplicate_store_name: 'Este nome de loja já está cadastrado.',
       duplicate_whatsapp: 'Este WhatsApp já está cadastrado.',
       duplicate_lead: 'Este contato já foi cadastrado.',
       supabase_not_configured: 'Formulário indisponível no momento. Verifique a configuração do Supabase.',
@@ -73,12 +72,11 @@ export default function ContactForm() {
           <p className="section-label">RESERVE SUA VAGA</p>
           <h2>Quer ver o agente do Masca vendendo pela sua loja?</h2>
           <p>
-            Deixe seus dados e conte o principal desafio do seu atendimento. O time do Masca entra em contato para entender sua loja e apresentar a condição de lançamento.
+            Deixe seu nome, e-mail e número. O time do Masca entra em contato para apresentar a condição de lançamento.
           </p>
           <div className="contact-trust">
             <span>Valor exclusivo de lançamento</span>
-            <span>Vagas limitadas para a primeira turma</span>
-            <span>Sem compromisso</span>
+            <span>Vagas limitadas</span>
           </div>
         </div>
 
@@ -98,7 +96,7 @@ export default function ContactForm() {
               <input type="email" name="email" placeholder="seu@email.com" autoComplete="email" required />
             </label>
             <label>
-              WhatsApp
+              Número
               <input
                 type="tel"
                 name="whatsapp"
@@ -110,29 +108,13 @@ export default function ContactForm() {
                 required
               />
             </label>
-            <label>
-              Nome da loja
-              <input type="text" name="store_name" placeholder="Ex: Loja da Ana" required />
-            </label>
-            <label>
-              Segmento da loja
-              <input type="text" name="store_segment" placeholder="Ex: moda, cosméticos, suplementos" required />
-            </label>
-            <label>
-              Quanto você paga hoje ou pagaria por uma solução assim?
-              <input type="text" name="budget" placeholder="Ex: R$ 2.000 por mês" required />
-            </label>
-            <label>
-              Principal dificuldade
-              <textarea name="message" placeholder="Ex: perco vendas quando demoro para responder no WhatsApp" rows="4" required />
-            </label>
 
             {Object.entries(utmParams).map(([key, val]) => (
               <input key={key} type="hidden" name={key} value={val} />
             ))}
 
             <button type="submit" className="form-submit" disabled={loading}>
-              {loading ? 'Enviando...' : 'Reserve sua vaga com valor exclusivo de lançamento'}
+              {loading ? 'Enviando...' : 'Reservar Vaga'}
             </button>
             {error && <p className="form-error">{error}</p>}
           </form>
