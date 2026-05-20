@@ -77,7 +77,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
             </div>
             <h3>Você está na lista!</h3>
             <p>
-              Assim que liberarmos novas vagas no beta fechado,
+              Assim que liberarmos novas vagas de lançamento,
               você será o primeiro a saber. Fique de olho no seu e-mail.
             </p>
           </div>
@@ -87,14 +87,14 @@ export default function WaitlistModal({ isOpen, onClose }) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              Beta fechado — vagas limitadas
+              Lançamento — vagas limitadas
             </div>
 
-            <h2>Seja avisado quando liberarmos novas vagas para o beta</h2>
+            <h2>Seja avisado quando liberarmos novas vagas de lançamento</h2>
 
             <p className="modal-desc">
-              Tenha acesso antecipado ao Masca para usar o vendedor IA
-              integrado ao estoque no seu próprio WhatsApp.
+              Tenha acesso antecipado ao Masca para testar o agente de vendas
+              integrado ao estoque no seu próprio WhatsApp. Sem cartão.
             </p>
 
             <form onSubmit={handleSubmit} className="modal-form" id="waitlist-form">
@@ -113,7 +113,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
                     <span className="modal-spinner" />
                   ) : (
                     <>
-                      Reservar vaga no beta
+                      Quero testar o agente
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>

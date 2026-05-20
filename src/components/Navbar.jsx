@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { trackEvent, trackInterestClick } from '../hooks/useAnalytics';
 
 function LogoMark({ small = false }) {
   return (
     <svg
-      width={small ? 34 : 46}
-      height={small ? 34 : 46}
+      width={small ? 36 : 52}
+      height={small ? 36 : 52}
       viewBox="0 0 800 800"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +23,7 @@ export { LogoMark };
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [sectionsOpen, setSectionsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,22 +34,29 @@ export default function Navbar() {
 
   function scrollTo(targetId) {
     setMenuOpen(false);
+    setSectionsOpen(false);
     document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function handleCtaClick(source) {
-    trackEvent(`cta_click_${source}`);
-    trackInterestClick(source);
-    scrollTo('contato');
-  }
-
   const links = [
-    ['Soluções', 'solucoes'],
+    ['Início', 'hero'],
+    ['Comparativo', 'comparativo-clt'],
+    ['Problema', 'diagnostico'],
     ['Como funciona', 'anatomia'],
-    ['Recursos', 'recursos'],
+    ['Painel', 'painel'],
+    ['Antes/depois', 'antes-depois'],
+    ['Contato', 'contato'],
+    ['Funcionalidades', 'diferenciais'],
     ['Resultados', 'resultados'],
     ['Planos', 'precos'],
-    ['Contato', 'contato'],
+  ];
+
+  const quickLinks = [
+    ['Comparativo', 'comparativo-clt'],
+    ['Problema', 'diagnostico'],
+    ['Como funciona', 'anatomia'],
+    ['Painel', 'painel'],
+    ['Planos', 'precos'],
   ];
 
   return (
@@ -72,12 +79,38 @@ export default function Navbar() {
         </button>
 
         <div className={`nav-menu${menuOpen ? ' open' : ''}`}>
-          {links.map(([label, target]) => (
-            <a key={target} href={`#${target}`} onClick={(e) => { e.preventDefault(); scrollTo(target); }}>
-              {label}
-            </a>
-          ))}
-          <button className="nav-cta" onClick={() => handleCtaClick('navbar')}>
+          <div className="nav-quick-links">
+            {quickLinks.map(([label, target]) => (
+              <a key={target} href={`#${target}`} onClick={(e) => { e.preventDefault(); scrollTo(target); }}>
+                {label}
+              </a>
+            ))}
+          </div>
+
+          <span className="nav-divider" aria-hidden="true" />
+
+          <div className={`nav-dropdown${sectionsOpen ? ' open' : ''}`}>
+            <button
+              className="nav-dropdown-toggle"
+              onClick={() => setSectionsOpen((open) => !open)}
+              aria-expanded={sectionsOpen}
+              aria-haspopup="true"
+            >
+              Seções
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+            <div className="nav-dropdown-panel">
+              {links.map(([label, target]) => (
+                <a key={target} href={`#${target}`} onClick={(e) => { e.preventDefault(); scrollTo(target); }}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <button className="nav-cta nav-cta-compact" onClick={() => scrollTo('contato')}>
             Reservar vaga
           </button>
         </div>

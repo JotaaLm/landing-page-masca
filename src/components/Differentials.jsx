@@ -1,28 +1,20 @@
 export default function Differentials() {
   const blocks = [
     {
-      tag: 'CHAT AO VIVO',
-      title: 'Atendimento humano no momento certo',
-      text: 'Se a conversa pedir negociação, exceção ou atenção humana, o time assume com todo o histórico preservado.',
-      metric: '5s',
-      metricLabel: 'para responder automaticamente',
-      visual: 'chat',
-    },
-    {
       tag: 'PEDIDOS AUTOMÁTICOS',
       title: 'Pedido completo direto no WhatsApp',
-      text: 'A IA confirma itens, quantidades, endereço, observações e entrega um pedido pronto para produção.',
+      text: 'O agente confirma itens, quantidades, endereço e observações para entregar um pedido mais claro ao seu time.',
       metric: '0',
       metricLabel: 'informações perdidas no caminho',
       visual: 'order',
     },
     {
-      tag: 'ESTOQUE E UPSELL',
+      tag: 'ESTOQUE E INDICAÇÃO',
       title: 'Recomendações que respeitam sua operação',
       text: 'O Masca sugere apenas produtos disponíveis e usa combos para aumentar o valor do carrinho.',
       metric: '+30%',
       metricLabel: 'potencial de ticket médio',
-      visual: 'upsell',
+      visual: 'indication',
     },
     {
       tag: 'DASHBOARD',
@@ -35,27 +27,6 @@ export default function Differentials() {
   ];
 
   function renderVisual(type) {
-    if (type === 'chat') {
-      return (
-        <>
-          <div className="visual-topline">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="chat-flow">
-            <span className="chat-pill client">Cliente pediu desconto</span>
-            <span className="chat-pill ai">IA reuniu contexto</span>
-            <span className="chat-pill human">Time assumiu</span>
-          </div>
-          <div className="live-handoff">
-            <span className="live-dot" />
-            Handoff ativo
-          </div>
-        </>
-      );
-    }
-
     if (type === 'order') {
       return (
         <>
@@ -74,7 +45,7 @@ export default function Differentials() {
       );
     }
 
-    if (type === 'upsell') {
+    if (type === 'indication') {
       return (
         <>
           <div className="product-stack">
@@ -117,8 +88,8 @@ export default function Differentials() {
     <section className="diff-section" id="diferenciais">
       <div className="container">
         <div className="section-heading reveal">
-          <p className="section-label">FUNCIONALIDADES PARA CONVERSÃO</p>
-          <h2 className="section-title">Uma operação fluida com as ferramentas que sua loja já usa</h2>
+          <p className="section-label">FUNCIONALIDADES PARA VENDER MAIS</p>
+          <h2 className="section-title">O agente do Masca ajuda sua loja a atender, vender e organizar melhor</h2>
         </div>
 
         <div className="feature-showcase">

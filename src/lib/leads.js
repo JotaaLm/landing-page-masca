@@ -30,9 +30,22 @@ export async function submitWaitlistLead(data) {
   return { success: true };
 }
 
+function getLeadInsertError(error) {
+  if (error?.code !== '23505' && !error?.message?.includes('duplicate')) {
+    return error?.message || 'unknown_error';
+  }
+
+  const duplicateInfo = `${error.message || ''} ${error.details || ''}`.toLowerCase();
+
+  if (duplicateInfo.includes('email')) return 'duplicate_email';
+  if (duplicateInfo.includes('whatsapp')) return 'duplicate_whatsapp';
+
+  return 'duplicate_lead';
+}
+
 /**
- * Persiste um lead completo (formulário de contato) no Supabase.
- * @param {{ name: string, email: string, whatsapp: string, revenue: string, utm: Record<string,string> }} data
+ * Persiste um lead do formulário de contato no Supabase.
+ * @param {{ name: string, email: string, whatsapp: string, utm: Record<string,string> }} data
  * @returns {Promise<{ success: boolean, error?: string }>}
  */
 export async function submitFullLead(data) {
@@ -44,23 +57,40 @@ export async function submitFullLead(data) {
     };
   }
 
-  const { error } = await supabase.from('leads').insert([
-    {
-      name: data.name,
-      email: data.email,
-      whatsapp: data.whatsapp,
-      revenue: data.revenue,
-      utm_source: data.utm?.utm_source || null,
-      utm_medium: data.utm?.utm_medium || null,
-      utm_campaign: data.utm?.utm_campaign || null,
-      utm_term: data.utm?.utm_term || null,
-      utm_content: data.utm?.utm_content || null,
-    },
-  ]);
+  const cleanText = (value) => {
+    if (typeof value !== 'string') return null;
+    const trimmed = value.trim();
+    return trimmed || null;
+  };
+
+  const whatsapp = cleanText(data.whatsapp);
+  const email = cleanText(data.email);
+  const baseLead = {
+    name: cleanText(data.name),
+    email,
+    whatsapp,
+  };
+  const lead = { ...baseLead };
+
+  Object.entries(data.utm || {}).forEach(([key, value]) => {
+    const cleanValue = cleanText(value);
+    if (cleanValue) lead[key] = cleanValue;
+  });
+
+  const { error } = await supabase.from('leads').insert([lead]);
+
+  if (error && (error.code === 'PGRST204' || error.message?.includes('column'))) {
+    const fallback = await supabase.from('leads').insert([baseLead]);
+    if (fallback.error) {
+      console.error('[Mascate] Erro ao salvar lead:', fallback.error.message);
+      return { success: false, error: getLeadInsertError(fallback.error) };
+    }
+    return { success: true };
+  }
 
   if (error) {
     console.error('[Mascate] Erro ao salvar lead:', error.message);
-    return { success: false, error: error.message };
+    return { success: false, error: getLeadInsertError(error) };
   }
 
   return { success: true };
