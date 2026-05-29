@@ -7,7 +7,6 @@
 ---
 
 **Project:** Masca.ai
-**Generated:** 2026-05-06 15:08:50
 **Category:** Service Landing Page
 
 ---

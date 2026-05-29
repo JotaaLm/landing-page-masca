@@ -7,10 +7,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local-only env variants (keep explicit for clarity)
+.env.local
+.env.*.local
+
+# Common secret/key material
+*.pem
+*.key
+*.p12
+*.pfx
+**/*id_rsa*
+*.crt
+
 node_modules
 dist
 dist-ssr
 *.local
+
+# Codex / agent scratch
+.agent/
 
 # Editor directories and files
 .vscode/*

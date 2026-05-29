@@ -1,10 +1,5 @@
 import { supabase } from './supabase';
 
-/**
- * Persiste um lead de waitlist (somente e-mail) no Supabase.
- * @param {{ email: string, utm_source?: string, utm_campaign?: string }} data
- * @returns {Promise<{ success: boolean, error?: string }>}
- */
 export async function submitWaitlistLead(data) {
   if (!supabase) {
     console.error('[Mascate] Supabase nao configurado. Waitlist lead nao foi salvo:', data);
@@ -43,11 +38,6 @@ function getLeadInsertError(error) {
   return 'duplicate_lead';
 }
 
-/**
- * Persiste um lead do formulário de contato no Supabase.
- * @param {{ name: string, email: string, whatsapp: string, utm: Record<string,string> }} data
- * @returns {Promise<{ success: boolean, error?: string }>}
- */
 export async function submitFullLead(data) {
   if (!supabase) {
     console.error('[Mascate] Supabase nao configurado. Full lead nao foi salvo:', data);
