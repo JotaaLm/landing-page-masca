@@ -45,7 +45,7 @@ async function readJson(request) {
 }
 
 function getSupabaseConfig(env) {
-  const url = cleanText(env.SUPABASE_URL, 500);
+  const url = cleanText(env.SUPABASE_URL || env.VITE_SUPABASE_URL, 500);
   const key = cleanText(env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY, 3000);
 
   if (!url || !key) return null;
@@ -256,7 +256,7 @@ async function handleHealth(env) {
   return json({
     success: true,
     worker: true,
-    has_supabase_url: Boolean(cleanText(env.SUPABASE_URL, 500)),
+    has_supabase_url: Boolean(cleanText(env.SUPABASE_URL || env.VITE_SUPABASE_URL, 500)),
     has_supabase_key: Boolean(cleanText(env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY, 3000)),
     supabase,
   });
