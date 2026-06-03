@@ -61,6 +61,7 @@ async function insertIntoSupabase(env, table, payload) {
 
   if (!config) {
     return {
+      status: 500,
       code: 'missing_supabase_config',
       message: 'Supabase runtime config is missing.',
     };
@@ -97,6 +98,8 @@ function isMissingColumnError(error) {
 }
 
 function getLeadInsertError(error) {
+  if (error?.code === 'missing_supabase_config') return 'missing_supabase_config';
+
   if (error?.code !== '23505' && !`${error?.message || ''}`.toLowerCase().includes('duplicate')) {
     return SAFE_ERRORS.unavailable;
   }
@@ -158,6 +161,7 @@ async function handleFullLead(request, env) {
     return json({
       success: false,
       error: getLeadInsertError(error),
+      code: error.code || null,
     }, error.status === 409 ? 409 : 500);
   }
 
@@ -187,16 +191,82 @@ async function handleWaitlistLead(request, env) {
     return json({
       success: false,
       error: getLeadInsertError(error),
+      code: error.code || null,
     }, error.status === 409 ? 409 : 500);
   }
 
   return json({ success: true });
 }
 
+async function checkSupabaseHealth(env) {
+  const config = getSupabaseConfig(env);
+
+  if (!config) {
+    return {
+      reachable: false,
+      status: null,
+      code: 'missing_supabase_config',
+    };
+  }
+
+  try {
+    const response = await fetch(`${config.url}/rest/v1/leads?select=id&limit=1`, {
+      method: 'GET',
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+        Accept: 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      return {
+        reachable: true,
+        status: response.status,
+        code: null,
+      };
+    }
+
+    let code = null;
+
+    try {
+      const error = await response.json();
+      code = error?.code || null;
+    } catch {
+      code = null;
+    }
+
+    return {
+      reachable: false,
+      status: response.status,
+      code,
+    };
+  } catch {
+    return {
+      reachable: false,
+      status: null,
+      code: 'network_error',
+    };
+  }
+}
+
+async function handleHealth(env) {
+  const supabase = await checkSupabaseHealth(env);
+
+  return json({
+    success: true,
+    worker: true,
+    has_supabase_url: Boolean(cleanText(env.SUPABASE_URL, 500)),
+    has_supabase_key: Boolean(cleanText(env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_ANON_KEY, 3000)),
+    supabase,
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === '/api/health') return handleHealth(env);
     if (url.pathname === '/api/leads') return handleFullLead(request, env);
     if (url.pathname === '/api/waitlist') return handleWaitlistLead(request, env);
     if (url.pathname.startsWith('/api/')) return json({ success: false, error: 'not_found' }, 404);
