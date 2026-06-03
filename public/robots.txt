@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://masca.ai/sitemap.xml

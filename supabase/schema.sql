@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS waitlist_leads (
   email       text NOT NULL,
   utm_source  text,
   utm_campaign text,
+  privacy_notice_version text,
+  privacy_accepted_at timestamptz,
   created_at  timestamptz DEFAULT now() NOT NULL
 );
 
@@ -18,6 +20,8 @@ CREATE TABLE IF NOT EXISTS leads (
   utm_campaign text,
   utm_term     text,
   utm_content  text,
+  privacy_notice_version text,
+  privacy_accepted_at timestamptz,
   created_at   timestamptz DEFAULT now() NOT NULL
 );
 
@@ -28,6 +32,10 @@ ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_medium text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_campaign text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_term text;
 ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_content text;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS privacy_notice_version text;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS privacy_accepted_at timestamptz;
+ALTER TABLE waitlist_leads ADD COLUMN IF NOT EXISTS privacy_notice_version text;
+ALTER TABLE waitlist_leads ADD COLUMN IF NOT EXISTS privacy_accepted_at timestamptz;
 
 DO $$
 BEGIN
@@ -53,6 +61,12 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_leads_whatsapp ON leads (whatsapp);
 
 ALTER TABLE waitlist_leads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leads ENABLE ROW LEVEL SECURITY;
+
+GRANT USAGE ON SCHEMA public TO anon;
+GRANT INSERT ON TABLE waitlist_leads TO anon;
+GRANT INSERT ON TABLE leads TO anon;
+GRANT USAGE, SELECT ON SEQUENCE waitlist_leads_id_seq TO anon;
+GRANT USAGE, SELECT ON SEQUENCE leads_id_seq TO anon;
 
 DROP POLICY IF EXISTS "Allow anon insert waitlist" ON waitlist_leads;
 CREATE POLICY "Allow anon insert waitlist"

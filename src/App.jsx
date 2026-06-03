@@ -8,10 +8,11 @@ import PainPoints from './components/PainPoints';
 import BeforeAfter from './components/BeforeAfter';
 import Anatomy from './components/Anatomy';
 import Differentials from './components/Differentials';
-import SocialProof from './components/SocialProof';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
 import HumanComparison from './components/HumanComparison';
+import PrivacyNotice from './components/PrivacyNotice';
+import CookieConsent from './components/CookieConsent';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -33,10 +34,11 @@ export default function App() {
         <BeforeAfter />
         <ContactForm />
         <Differentials />
-        <SocialProof />
         <Pricing />
       </main>
       <Footer />
+      <PrivacyNotice />
+      <CookieConsent />
     </>
   );
 }

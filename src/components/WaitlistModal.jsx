@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { trackEvent } from '../hooks/useAnalytics';
 import { submitWaitlistLead } from '../lib/leads';
 
+const GENERIC_WAITLIST_ERROR =
+  'Não conseguimos salvar seu e-mail agora. Tente novamente em alguns instantes.';
+
 export default function WaitlistModal({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -26,34 +29,43 @@ export default function WaitlistModal({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isOpen, onClose]);
 
+  function getSubmitErrorMessage(errorCode) {
+    const messages = {
+      duplicate_email: 'Este e-mail já está na lista de espera!',
+      duplicate_lead: 'Este e-mail já está na lista de espera!',
+      service_unavailable: GENERIC_WAITLIST_ERROR,
+    };
+
+    return messages[errorCode] || GENERIC_WAITLIST_ERROR;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const params = new URLSearchParams(window.location.search);
-    const data = {
-      email,
-      utm_source: params.get('utm_source'),
-      utm_campaign: params.get('utm_campaign'),
-    };
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const data = {
+        email,
+        utm_source: params.get('utm_source'),
+        utm_campaign: params.get('utm_campaign'),
+      };
 
-    trackEvent('waitlist_email_enviado', { email_domain: email.split('@')[1] });
-    const result = await submitWaitlistLead(data);
+      const result = await submitWaitlistLead(data);
 
-    setLoading(false);
-    if (result.success) {
-      setSubmitted(true);
-      return;
+      if (result.success) {
+        trackEvent('waitlist_email_enviado', { email_domain: email.split('@')[1] });
+        setSubmitted(true);
+        return;
+      }
+
+      setError(getSubmitErrorMessage(result.error));
+    } catch {
+      setError(GENERIC_WAITLIST_ERROR);
+    } finally {
+      setLoading(false);
     }
-    if (result.error === 'supabase_not_configured') {
-      setError('Formulario indisponivel no momento. Verifique a configuracao do Supabase.');
-      return;
-    }
-
-    setError(result.error?.includes('duplicate')
-      ? 'Este e-mail já está na lista de espera!'
-      : 'Erro ao salvar. Tente novamente.');
   }
 
   if (!isOpen) return null;
@@ -87,7 +99,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              Lançamento — vagas limitadas
+              Lançamento - vagas limitadas
             </div>
 
             <h2>Seja avisado quando liberarmos novas vagas de lançamento</h2>
@@ -121,6 +133,13 @@ export default function WaitlistModal({ isOpen, onClose }) {
                   )}
                 </button>
               </div>
+              <label className="privacy-consent modal-consent">
+                <input type="checkbox" name="privacy_ack" value="accepted" required />
+                <span>
+                  Li e concordo com o <a href="#privacidade">Aviso de Privacidade</a>.
+                  Autorizo o uso do meu e-mail para avisos sobre vagas do Masca.
+                </span>
+              </label>
               {error && (
                 <p className="modal-error">{error}</p>
               )}

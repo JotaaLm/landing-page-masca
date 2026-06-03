@@ -112,7 +112,7 @@ export default function Hero() {
         </button>
 
         <div className="hero-copy">
-          <p className="hero-tag reveal reveal-delay-1">AGENTE INTELIGENTE PARA VENDER PELO WHATSAPP</p>
+          <p className="hero-tag reveal reveal-delay-1">IA DE VENDAS PARA WHATSAPP, VAREJO E DELIVERY</p>
           <h1 className="reveal reveal-delay-2">
             <span className="headline-neutral">Já pensou vender 24 horas por dia,</span>
             <span className="headline-typed-line">
@@ -120,8 +120,8 @@ export default function Hero() {
             </span>
           </h1>
           <p className="hero-sub reveal reveal-delay-3">
-            O Masca automatiza o WhatsApp da sua loja para atender clientes, recomendar produtos,
-            montar pedidos e manter o estoque sincronizado enquanto seu time foca no que importa.
+            O Masca é uma IA de vendas para WhatsApp que automatiza o atendimento da sua loja,
+            recomenda produtos, monta pedidos e mantém catálogo, estoque e delivery sincronizados.
           </p>
           <button className="hero-cta reveal reveal-delay-4" onClick={handleCtaClick}>
             Reservar Vaga

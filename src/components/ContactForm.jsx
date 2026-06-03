@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { trackEvent } from '../hooks/useAnalytics';
 import { submitFullLead } from '../lib/leads';
 
+const GENERIC_SUBMIT_ERROR =
+  'Não conseguimos enviar sua reserva agora. Tente novamente em alguns instantes.';
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,10 +41,10 @@ export default function ContactForm() {
       duplicate_email: 'Este e-mail já está cadastrado.',
       duplicate_whatsapp: 'Este WhatsApp já está cadastrado.',
       duplicate_lead: 'Este contato já foi cadastrado.',
-      supabase_not_configured: 'Formulário indisponível no momento. Verifique a configuração do Supabase.',
+      service_unavailable: GENERIC_SUBMIT_ERROR,
     };
 
-    return messages[errorCode] || 'Erro ao enviar. Tente novamente.';
+    return messages[errorCode] || GENERIC_SUBMIT_ERROR;
   }
 
   async function handleSubmit(e) {
@@ -49,20 +52,25 @@ export default function ContactForm() {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    data.utm = utmParams;
+    try {
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      data.utm = utmParams;
 
-    trackEvent('lead_formulario_enviado');
-    const result = await submitFullLead(data);
+      const result = await submitFullLead(data);
 
-    setLoading(false);
-    if (result.success) {
-      setSubmitted(true);
-      return;
+      if (result.success) {
+        trackEvent('lead_formulario_enviado');
+        setSubmitted(true);
+        return;
+      }
+
+      setError(getSubmitErrorMessage(result.error));
+    } catch {
+      setError(GENERIC_SUBMIT_ERROR);
+    } finally {
+      setLoading(false);
     }
-
-    setError(getSubmitErrorMessage(result.error));
   }
 
   return (
@@ -108,6 +116,19 @@ export default function ContactForm() {
                 required
               />
             </label>
+
+            <label className="privacy-consent">
+              <input type="checkbox" name="privacy_ack" value="accepted" required />
+              <span>
+                Li e concordo com o <a href="#privacidade">Aviso de Privacidade</a>.
+                Autorizo o uso dos meus dados para responder a esta solicitação e tratar minha reserva.
+              </span>
+            </label>
+
+            <p className="form-privacy-note">
+              Coletamos apenas os dados do formulário e parâmetros de campanha, quando existirem.
+              Você pode solicitar acesso, correção ou exclusão pelo canal de privacidade no rodapé.
+            </p>
 
             {Object.entries(utmParams).map(([key, val]) => (
               <input key={key} type="hidden" name={key} value={val} />

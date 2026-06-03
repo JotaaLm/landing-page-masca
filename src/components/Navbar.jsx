@@ -47,7 +47,6 @@ export default function Navbar() {
     ['Antes/depois', 'antes-depois'],
     ['Contato', 'contato'],
     ['Funcionalidades', 'diferenciais'],
-    ['Resultados', 'resultados'],
     ['Planos', 'precos'],
   ];
 
@@ -60,7 +59,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+    <nav className={`navbar${scrolled ? ' scrolled' : ''}`} aria-label="Navegação principal">
       <div className="container nav-inner">
         <a className="nav-logo" href="#hero" onClick={(e) => { e.preventDefault(); scrollTo('hero'); }} aria-label="Masca início">
           <LogoMark />

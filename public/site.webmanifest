@@ -1,0 +1,19 @@
+{
+  "name": "Masca",
+  "short_name": "Masca",
+  "description": "Agente de vendas no WhatsApp para lojas de varejo e delivery.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fffaf6",
+  "theme_color": "#ff6a1a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

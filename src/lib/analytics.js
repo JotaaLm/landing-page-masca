@@ -1,9 +1,37 @@
+import { ANALYTICS_CONSENT_EVENT, hasAnalyticsConsent } from './privacy';
+
+const UMAMI_SCRIPT_SRC = 'https://cloud.umami.is/script.js';
+const UMAMI_WEBSITE_ID = '1b1bab44-5f4b-49b8-a7da-ef969d4fcf6b';
+
 const pendingUmamiEvents = [];
 let flushTimer = null;
 let flushAttempts = 0;
+let umamiScriptRequested = false;
+
+function canUseAnalytics() {
+  return typeof window !== 'undefined' && hasAnalyticsConsent();
+}
+
+function loadUmamiScript() {
+  if (!canUseAnalytics() || umamiScriptRequested) return;
+
+  if (document.querySelector(`script[src="${UMAMI_SCRIPT_SRC}"]`)) {
+    umamiScriptRequested = true;
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = UMAMI_SCRIPT_SRC;
+  script.dataset.websiteId = UMAMI_WEBSITE_ID;
+  script.dataset.autoTrack = 'false';
+  script.onload = () => flushUmamiEvents();
+  document.head.appendChild(script);
+  umamiScriptRequested = true;
+}
 
 function canUseUmami() {
-  return typeof window !== 'undefined' && typeof window.umami?.track === 'function';
+  return canUseAnalytics() && typeof window.umami?.track === 'function';
 }
 
 function sendToUmami(eventName, data) {
@@ -16,6 +44,8 @@ function sendToUmami(eventName, data) {
 }
 
 function flushUmamiEvents() {
+  if (!canUseAnalytics()) return false;
+  loadUmamiScript();
   if (!canUseUmami()) return false;
 
   while (pendingUmamiEvents.length > 0) {
@@ -28,7 +58,7 @@ function flushUmamiEvents() {
 }
 
 function scheduleUmamiFlush() {
-  if (typeof window === 'undefined' || flushTimer) return;
+  if (!canUseAnalytics() || flushTimer) return;
 
   flushTimer = window.setTimeout(() => {
     flushTimer = null;
@@ -43,6 +73,9 @@ function scheduleUmamiFlush() {
 }
 
 function trackUmami(eventName, data) {
+  if (!canUseAnalytics()) return false;
+  loadUmamiScript();
+
   if (canUseUmami()) {
     sendToUmami(eventName, data);
     flushUmamiEvents();
@@ -57,6 +90,13 @@ function trackUmami(eventName, data) {
 export function trackEvent(eventName, data = {}) {
   if (import.meta.env.DEV) {
     console.log(`[Mascate Analytics] ${eventName}`, data);
+  }
+
+  if (!canUseAnalytics()) {
+    if (import.meta.env.DEV) {
+      console.log(`[Mascate Analytics] ${eventName} bloqueado ate consentimento.`);
+    }
+    return;
   }
 
   if (trackUmami(eventName, data)) {
@@ -74,6 +114,9 @@ export function trackEvent(eventName, data = {}) {
 }
 
 export function trackPageView() {
+  if (typeof window === 'undefined' || !canUseAnalytics()) return;
+
+  loadUmamiScript();
   trackUmami();
 
   const params = new URLSearchParams(window.location.search);
@@ -90,5 +133,17 @@ export function trackInterestClick(location, extraData = {}) {
   trackEvent('interesse_botao_clicado', {
     location,
     ...extraData,
+  });
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener(ANALYTICS_CONSENT_EVENT, (event) => {
+    if (event.detail?.value === 'accepted') {
+      loadUmamiScript();
+      scheduleUmamiFlush();
+      return;
+    }
+
+    pendingUmamiEvents.length = 0;
   });
 }

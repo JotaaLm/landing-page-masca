@@ -1,3 +1,4 @@
+import { openCookiePreferences } from '../lib/privacy';
 import { LogoMark } from './Navbar';
 
 export default function Footer() {
@@ -37,11 +38,12 @@ export default function Footer() {
             </a>
           </address>
         </div>
-        <nav>
+        <nav aria-label="Links de rodapé">
           <a href="#diagnostico">Problema</a>
-          <a href="#resultados">Resultados</a>
           <a href="#precos">Planos</a>
           <a href="#contato">Contato</a>
+          <a href="#privacidade">Privacidade</a>
+          <button type="button" onClick={openCookiePreferences}>Cookies</button>
         </nav>
       </div>
       <div className="container footer-bottom">
