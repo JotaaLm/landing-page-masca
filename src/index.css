@@ -77,13 +77,46 @@ a { color: inherit; text-decoration: none; }
 }
 
 .nav-logo {
-  gap: 12px;
+  gap: 14px;
   color: var(--accent);
   font-size: 1.62rem;
   font-weight: 800;
 }
 
-.nav-logo span { color: #20242d; }
+.brand-logo-img {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.brand-wordmark {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  height: 58px;
+  line-height: 0;
+}
+
+.brand-wordmark-small {
+  height: 40px;
+}
+
+.brand-wordmark-grey {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: brightness(0) saturate(100%) invert(34%) sepia(8%) saturate(1195%) hue-rotate(182deg) brightness(94%) contrast(89%);
+}
+
+.brand-wordmark-triangles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--accent);
+  shape-rendering: geometricPrecision;
+  pointer-events: none;
+}
 
 .nav-menu {
   margin-left: auto;
@@ -476,11 +509,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .robot-chest-logo {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 88;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+  object-fit: contain;
   opacity: 0.9;
   filter: drop-shadow(0 3px 5px rgba(129, 67, 24, 0.1));
 }

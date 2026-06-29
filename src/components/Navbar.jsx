@@ -1,24 +1,48 @@
 import { useEffect, useState } from 'react';
 
 function LogoMark({ small = false }) {
+  const size = small ? 52 : 72;
+
   return (
-    <svg
-      width={small ? 36 : 52}
-      height={small ? 36 : 52}
-      viewBox="0 0 800 800"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <img
+      src="/logo.png"
+      alt=""
+      width={size}
+      height={size}
       aria-hidden="true"
-      className="brand-logo-svg"
-    >
-      <path d="M150 475V375C150 225 283 225 350 325L450 475C517 575 650 575 650 475V375C650 225 517 225 450 325L350 475C283 575 150 575 150 475Z" stroke="currentColor" strokeWidth="90" strokeLinejoin="round" />
-      <path d="M360 340L440 460" stroke="#ffffff" strokeWidth="116" />
-      <path d="M359 338.5L441 461.5" stroke="currentColor" strokeWidth="90" />
-    </svg>
+      className="brand-logo-img"
+    />
   );
 }
 
-export { LogoMark };
+function LogoWordmark({ small = false }) {
+  return (
+    <span
+      className={`brand-wordmark${small ? ' brand-wordmark-small' : ''}`}
+      aria-label="Masca"
+      role="img"
+    >
+      <img
+        src="/logo-wordmark.png"
+        alt=""
+        aria-hidden="true"
+        className="brand-wordmark-grey"
+      />
+      <svg
+        className="brand-wordmark-triangles"
+        viewBox="0 0 802 311"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <polygon points="269,164 246,208 291,208" />
+        <polygon points="720,164 697,208 742,208" />
+      </svg>
+    </span>
+  );
+}
+
+export { LogoMark, LogoWordmark };
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -63,7 +87,7 @@ export default function Navbar() {
       <div className="container nav-inner">
         <a className="nav-logo" href="#hero" onClick={(e) => { e.preventDefault(); scrollTo('hero'); }} aria-label="Masca início">
           <LogoMark />
-          <span>Masca</span>
+          <LogoWordmark />
         </a>
 
         <button

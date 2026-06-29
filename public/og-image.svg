@@ -21,11 +21,8 @@
   <circle cx="135" cy="515" r="210" fill="#246bfe" opacity="0.07" />
 
   <g transform="translate(74 64)">
-    <g transform="scale(.12)" fill="none" stroke="#ff6a1a" stroke-linejoin="round">
-      <path d="M150 475V375C150 225 283 225 350 325L450 475C517 575 650 575 650 475V375C650 225 517 225 450 325L350 475C283 575 150 575 150 475Z" stroke-width="90" />
-      <path d="M359 338.5L441 461.5" stroke-width="90" />
-    </g>
-    <text x="112" y="64" fill="#20242d" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800">Masca</text>
+    <image href="/logo.png" x="0" y="0" width="96" height="96" />
+    <image href="/logo-wordmark.png" x="112" y="18" height="60" />
   </g>
 
   <g transform="translate(76 186)">

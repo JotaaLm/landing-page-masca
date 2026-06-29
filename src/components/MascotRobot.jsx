@@ -59,10 +59,7 @@ export default function MascotRobot({ className = '' }) {
     <div className={`mascot-robot ${className}`} ref={mascotRef} aria-hidden="true">
       <svg className="robot-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
         <rect className="robot-body" x="100" y="140" width="100" height="80" rx="40" />
-        <g className="robot-chest-logo" transform="translate(156 160) scale(0.036)">
-          <path d="M150 475V375C150 225 283 225 350 325L450 475C517 575 650 575 650 475V375C650 225 517 225 450 325L350 475C283 575 150 575 150 475Z" />
-          <path d="M359 338.5L441 461.5" />
-        </g>
+        <image className="robot-chest-logo" href="/logo.png" x="133" y="151" width="34" height="34" />
         <rect className="robot-neck" x="140" y="130" width="20" height="20" />
         <g className="robot-head">
           <rect className="robot-face" x="80" y="50" width="140" height="100" rx="50" />

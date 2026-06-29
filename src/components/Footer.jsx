@@ -1,5 +1,5 @@
 import { openCookiePreferences } from '../lib/privacy';
-import { LogoMark } from './Navbar';
+import { LogoMark, LogoWordmark } from './Navbar';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ export default function Footer() {
         <div>
           <div className="footer-brand">
             <LogoMark small />
-            <strong>Masca</strong>
+            <LogoWordmark small />
           </div>
           <p className="footer-copy">Agente inteligente para WhatsApp, atendimento e vendas em lojas que querem responder mais rápido e perder menos oportunidades.</p>
           <address className="footer-legal" aria-label="Dados legais e de contato">
