@@ -65,6 +65,7 @@ export default function PrivacyNotice() {
           <h2 id="privacy-title">Aviso de Privacidade</h2>
           <p>
             Este aviso resume como o Masca trata dados pessoais coletados nesta página.
+            O serviço é operado por 63.825.532 MATHEUS MENEZES DA SILVA, CNPJ 63.825.532/0001-88.
             Última atualização: {PRIVACY_NOTICE_VERSION}.
           </p>
         </div>
