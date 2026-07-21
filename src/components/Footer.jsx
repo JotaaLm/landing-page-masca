@@ -16,8 +16,6 @@ export default function Footer() {
           <address className="footer-legal" aria-label="Dados legais e de contato">
             <p className="footer-legal-meta">
               <span>CNPJ 63.825.532/0001-88</span>
-              <span aria-hidden="true">·</span>
-              <span>Recife, PE</span>
             </p>
             <a className="footer-legal-contact" href="mailto:matheus@masca.ai">
               matheus@masca.ai
